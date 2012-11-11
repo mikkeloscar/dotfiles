@@ -1,0 +1,7 @@
+case "$1" in 
+	git*)
+	__EXECUTED_GIT_COMMAND=1
+	;;
+esac
+
+#  vim: set ts=4 sw=4 tw=79 filetype=zsh:
