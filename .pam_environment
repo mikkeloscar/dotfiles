@@ -1,0 +1,4 @@
+EDITOR=vim
+PAGER=less
+TERMINAL=termite
+BROWSER=chromium
