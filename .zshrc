@@ -36,20 +36,34 @@ if [[ -n $terminfo[kbs] ]]; then
     # bindkey -M vicmd "$terminfo[kbs]"   backward-char
 fi
 
+# Make sure the terminal is in application mode, when zle is
+# active. Only then are the values from $terminfo valid.
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+    function zle-line-init () {
+        printf '%s' "${terminfo[smkx]}"
+    }
+    function zle-line-finish () {
+        printf '%s' "${terminfo[rmkx]}"
+    }
+    zle -N zle-line-init
+    zle -N zle-line-finish
+fi
+
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/moscar/.zshrc'
+zstyle :compinstall filename "/home/$HOME/.zshrc"
 
 autoload -Uz compinit && compinit
 autoload -U colors && colors
 
 alias ls='ls --color=auto'
 # http://geoff.greer.fm/lscolors/
-export LS_COLORS='ow=0;44:'
+export LS_COLORS='ow=0;44:ln=36;40:'
 
-# Add pacman completion to pacman-color
-compdef _pacman pacman-color=pacman
-alias pc='sudo pacman-color'
-alias pcc='pacman-color'
+export GREP_OPTIONS='--color=auto'
+export GREP_COLOR='31'
+
+alias pc='sudo pacman'
+alias pcc='pacman'
 
 # Webserver
 alias webserver="sudo systemctl start httpd.service mysqld.service"
@@ -59,17 +73,19 @@ alias atitemp="aticonfig --odgt"
 alias atifan="aticonfig --pplib-cmd 'get fanspeed 0'"
 
 # ssh to diku
-# cat ~/.ssh/id_rsa.pud | ssh mikkell@tyr.diku.dk 'cat >> .ssh/authorized_keys'
 alias diku="ssh mikkell@tyr.diku.dk"
-alias diku-browse="ssh -C2qTnN -D 8080 mikkell@tyr.diku.dk & firefox -P diku"
+alias diku-proxy='ssh -C2qTnN -D 8080 mikkell@tyr.diku.dk & chromium --proxy-server="socks5://localhost:8080"'
+
+alias ct-cu="sudo stty -F /dev/ttyUSB0 -crtscts && sudo cu -s 115200 -l /dev/ttyUSB0"
 
 # cd up dir
 alias u="cd .."
 alias uu="cd ../.."
 alias uuu="cd ../../.."
 
-alias lacasa="cd ~/Dropbox/development/github/lacasa"
-alias cddiku="cd ~/Dropbox/diku/2/4"
+# Paste services
+alias ix="curl -sF 'f:1=<-' ix.io"
+alias sprunge='curl -F "sprunge=<-" http://sprunge.us'
 
 # less coloring
 export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -80,52 +96,48 @@ export LESS_TERMCAP_so=$'\E[01;44;30m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-#editor
-export EDITOR="vim"
-
 # # ----- GIT STATUS SCRIPT -------
 # Allow for functions in the prompt.
 setopt PROMPT_SUBST
- 
+
 # Autoload zsh functions.
 fpath=(~/.zsh/func $fpath)
 autoload -U ~/.zsh/func/*(:t)
- 
+
 # Enable auto-execution of functions.
 typeset -ga preexec_functions
 typeset -ga precmd_functions
 typeset -ga chpwd_functions
- 
+
 # Append git functions needed for prompt.
 preexec_functions+='preexec_update_git_vars'
 precmd_functions+='precmd_update_git_vars'
 chpwd_functions+='chpwd_update_git_vars'
- 
+
 # Set the prompt.
 light_green=$'%{\e[1;32m%}'
 light_cyan=$'%{\e[1;36m%}'
 rst=$'%{\e[0m%}'
-PROMPT=$'${light_green}%n ${rst}%{$fg[red]%}➜ %{$fg[green]%}%m %{$fg[blue]%}$(prompt_git_info)
-${light_cyan}%~ %{$fg[white]%}> %{$reset_color%}'
 
-RPROMPT="[%{$fg[magenta]%}%?%{$reset_color%}]"
+# GIT_PROMPT_BRANCH_C="%{$fg[magenta]%}"
+# GIT_PROMPT_COMMIT_C="%{$fg[magenta]%}"
+# GIT_PROMPT_STATUS_C=""
+# GIT_PROMPT_SUFFIX_C=""
 
 
+# PROMPT=$'${light_green}%n${rst}%{$fg[red]%}@%{$fg[green]%}%m %{$fg[blue]%}$(prompt_git_info)
+# ${light_cyan}%~ %{$fg[white]%}> %{$reset_color%}'
+PROMPT=$'%{$fg[magenta]%}%n%{$fg[cyan]%}@%{$fg[yellow]%}%m %{$fg[blue]%}$(prompt_git_info)
+%{$fg[green]%}%~ %{$fg[white]%}$ %{$reset_color%}'
 
-# Android SDK
-export PATH=${PATH}:android-sdks/tools:android-sdks/platform-tools
+RPROMPT="[%{$fg[cyan]%}%?%{$reset_color%}]"
+
 
 # -------------- custom stuff ----------------------------------
 #
 
 # Good stuff from oh-my-zsh
 #
-# Color grep results
-# Examples: http://rubyurl.com/ZXv
-#
-export GREP_OPTIONS='--color=auto'
-export GREP_COLOR='31'
-
 # fixme - the load process here seems a bit bizarre
 
 unsetopt menu_complete   # do not autoselect the first completion entry
@@ -208,18 +220,8 @@ if [ "x$COMPLETION_WAITING_DOTS" = "xtrue" ]; then
 fi
 
 # General purpose aliases ---------------------------------------
-# Push and pop directories on directory stack
-alias pu='pushd'
-alias po='popd'
-
 # Basic directory operations
 alias ...='cd ../..'
-alias -- -='cd -'
-
-# Super user
-alias _='sudo'
-
-#alias g='grep -in'
 
 # Show history
 alias history='fc -l 1'
@@ -235,138 +237,33 @@ alias g='git'
 compdef g=git
 alias gst='git status'
 compdef _git gst=git-status
-alias gl='git pull'
-compdef _git gl=git-pull
-alias gup='git fetch && git rebase'
-compdef _git gup=git-fetch
-alias gp='git push'
-compdef _git gp=git-push
-gdv() { git-diff -w "$@" | view - }
-compdef _git gdv=git-diff
-alias gc='git commit -v'
-compdef _git gc=git-commit
-alias gca='git commit -v -a'
-compdef _git gca=git-commit
-alias gco='git checkout'
-compdef _git gco=git-checkout
-alias gb='git branch'
-compdef _git gb=git-branch
-alias gba='git branch -a'
-compdef _git gba=git-branch
-alias gcount='git shortlog -sn'
-compdef gcount=git
-alias gcp='git cherry-pick'
-compdef _git gcp=git-cherry-pick
-alias glg='git log --stat --max-count=5'
-compdef _git glg=git-log
-alias glgg='git log --graph --max-count=5'
-compdef _git glgg=git-log
-alias gss='git status -s'
-compdef _git gss=git-status
-alias ga='git add'
-compdef _git ga=git-add
-alias gm='git merge'
-compdef _git gm=git-merge
-
-# Git and svn mix
-alias git-svn-dcommit-push='git svn dcommit && git push github master:svntrunk'
-compdef git-svn-dcommit-push=git
-
-alias gsr='git svn rebase'
-alias gsd='git svn dcommit'
-#
-# Will return the current branch name
-# Usage example: git pull origin $(current_branch)
-#
-function current_branch() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo ${ref#refs/heads/}
-}
-
-# these aliases take advantage of the previous function
-alias ggpull='git pull origin $(current_branch)'
-compdef ggpull=git
-alias ggpush='git push origin $(current_branch)'
-compdef ggpush=git
-alias ggpnp='git pull origin $(current_branch) && git push origin $(current_branch)'
-compdef ggpnp=git
-
-# sprunge
-# Smart sprunge alias/script.
-#
-# Contributed and SLIGHTLY modded by Matt Parnell/ilikenwf <parwok -at- gmail>
-# Created by the blogger at the URL below...I don't know where to find his/her name
-# Original found at http://www.shellperson.net/sprunge-pastebin-script/
-
-sprunge_usage() {
-  cat << HERE
-Usage:
-  sprunge [files]
-  sprunge < file
-  piped_data | sprunge
-
-Upload data and fetch URL from the pastebin http://sprunge.us.
-HERE
-}
-
-if (( $+commands[python] )); then
-  # use python to attempt to detect the syntax
-  sprunge_syntax() {
-#    echo "try:
-#	from pygments.lexers import get_lexer_for_filename
-#	print(get_lexer_for_filename('$1').aliases[0])
-#except:
-#	print('text')" | python
-	  echo ${1##*.}
-  }
-else
-  # if we happen to lack python, just report everything as text
-  omz_log_msg "sprunge: syntax highlighting disabled since python isn't available"
-  sprunge_syntax() { echo 'text' }
-fi
-
-sprunge() {
-  local urls url file syntax
-
-  urls=()
-
-  if [[ $1 == '-h' || $1 == '--help' ]]; then
-    # print usage information
-    sprunge_usage
-    return 0
-  elif [[ ! -t 0 || $#argv -eq 0 ]]; then
-    # read from stdin
-    url=$(curl -s -F 'sprunge=<-' http://sprunge.us <& 0)
-    urls=(${url//[[:space:]]})
-    [[ -z $url ]] || echo "stdin\t$url" >> ~/.sprunge.log
-  else
-    # treat arguments as a list of files to upload
-    for file in $@; do
-      if [[ ! -f $file ]]; then
-        echo "$file isn't a file" >&2
-        continue
-      fi
-
-      syntax=$(sprunge_syntax $file)
-      url=$(curl -s -F 'sprunge=<-' http://sprunge.us < $file)
-      url=${url//[[:space:]]}
-      [[ $syntax != text ]] && url=${url}?${syntax}
-
-      [[ -z $url ]] || echo "$file\t$url" >> $OMZ/sprunge.log
-      urls+=(${url})
-    done
-  fi
-
-  # output each url on its own line
-  for url in $urls
-    echo $url
-
-  # don't copy to clipboad if piped
-  # [[ -t 1 ]] && sendtoclip $urls
-}
 
 # rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
+# pkgfile
+[ -r /usr/share/doc/pkgfile/command-not-found.zsh ] && . /usr/share/doc/pkgfile/command-not-found.zsh
+
 # python virtualenvwrap
 source /usr/bin/virtualenvwrapper.sh
+
+# Android SDK
+export PATH=${PATH}:android-sdks/tools:android-sdks/platform-tools
+
+export CHROOT_STANDARD=/media/chroots/standard
+
+# # zsh-autosuggestions
+# source ~/.zsh-autosuggestions/autosuggestions.zsh
+#
+# zle-line-init() {
+#     zle autosuggest-start
+# }
+# zle -N zle-line-init
+# export linaro toolchain (gcc 4.9)
+export PATH=/usr/local/gcc-linaro-arm-linux-gnueabihf-4.9-2014.05_linux/bin/:$PATH
+
+. <(npm completion)
+
+# GOPATH
+export GOPATH=$HOME/projects/go
+export PATH=$PATH:$GOPATH/bin
