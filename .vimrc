@@ -1,94 +1,66 @@
-" This must be first, because it changes other options as side effect
-set nocompatible
-filetype off                   " required!
+set nocompatible    " required
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" Vundle {{{
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
 
-" let Vundle manage Vundle
-" required! 
-Bundle "gmarik/vundle"
-" }}}
-
-
-" Plugins {{{
-" Syntax highlight
-
-" MarkDown (github)
-Bundle "plasticboy/vim-markdown"
-
-" General plugins
-
-" NERDtree (github)
-Bundle "scrooloose/nerdtree"
+" Plugins
+Plugin 'scrooloose/nerdtree'
 nmap <F4> :NERDTreeToggle<CR>
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-fugitive'
+Plugin 'jiangmiao/auto-pairs'
+let g:AutoPairsShortcutFastWrap = ''
+Plugin 'Valloric/YouCompleteMe'
+set completeopt=menuone
+" let g:ycm_add_preview_to_completeopt = 0
+" let g:ycm_autoclose_preview_window_after_completion = 1
+Plugin 'michaeljsmith/vim-indent-object'
+Plugin 'bling/vim-airline'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_symbols = get(g:, 'airline_symbols', {})
+if has('gui_running')
+  let g:airline_symbols.space = "\u3000"
+  let g:airline_symbols.branch = "⎇ "
+endif
+Plugin 'kien/ctrlp.vim'
+let g:ctrlp_custom_ignore = {
+  \ 'dir': '\v[\/](node_modules|bower_components|docs|dist)$',
+  \ }
+Plugin 'scrooloose/syntastic'
+" let g:syntastic_cpp_checkers=['cpp']
+let g:syntastic_cpp_check_header = 1
 
-" TComment (github)
-Bundle "tomtom/tcomment_vim"
+" Syntax highlighting
+Plugin 'plasticboy/vim-markdown'
+let g:vim_markdown_folding_disabled=1
+Plugin 'tpope/vim-haml'
+Plugin 'digitaltoad/vim-jade'
+Plugin 'groenewege/vim-less'
+Plugin 'evanmiller/nginx-vim-syntax'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'wting/rust.vim'
+Plugin 'fatih/vim-go'
 
-" snipMate (github)
-Bundle "msanders/snipmate.vim"
+" Color schemes
+Plugin 'tomasr/molokai'
+Plugin 'altercation/vim-colors-solarized'
 
-" tabbar (vim.org/scripts)
-Bundle "TabBar"
+" stuff
+Plugin 'adimit/prolog.vim'
 
-" sass syntax
-Bundle "tpope/vim-haml"
-
-" vim-rails
-Bundle "tpope/vim-rails"
-
-" FuzzyFinder (vim-scripts)
-" L9 is a FuzzyFinder dependency
-Bundle "L9"
-Bundle "FuzzyFinder"
-nmap <Leader>fb :FufBuffer<CR> 
-nmap <Leader>ff :FufFile<CR> 
-
-" CommandT (% git)
-Bundle "git://git.wincent.com/command-t.git"
-let g:CommandTMaxFiles=60000
-" let g:CommandTPath+=
-" Remember to compile C files when installing:
-"
-" $ cd .vim/bundle/command-t/ruby/command-t/
-" $ ruby extconf.rb
-" $ make
-"
-"
-" Bundle 'greyblake/vim-preview'
-Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'spiiph/vim-space'
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-powerline'
-" Bundle 'spolu/dwm.vim'
-
-"
-" colorschemes {{{
-Bundle 'tomasr/molokai'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'sjl/badwolf'
-" }}}
-
-" This is not really a plugin but...
-filetype plugin on
-" autocomplete menu
-set ofu=syntaxcomplete#Complete
-" Map omni menu
-inoremap <C-space> <C-x><C-o>
-" Close helpwindow when leaving inputmode
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-" autocmd <CR> * if pumvisible() == -1|pclose|endif
-
-" }}}
-
+call vundle#end()
 filetype plugin indent on
+
 
 " General mappings {{{
 
 " change the mapleader from \ to ,
-let mapleader = ","
+let mapleader = ','
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
@@ -100,60 +72,35 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
-" Toggle trough buffers (Also possible to use Alt+(num)
+" Toggle trough buffers
 map <F2> :bprevious<CR>
 map <F3> :bnext<CR>
 imap <F2> <Esc>:bprevious<CR>
 imap <F3> <Esc>:bnext<CR>
 
 " close current buffer
-" map <Leader>d :bd<CR>
-map <Leader>d :call CleanClose(0)<CR>
-
-" map fc <Esc>:call CleanClose(1)
-" 
-" map fq <Esc>:call CleanClose(0)
+map <Leader>d :call CleanClose()<CR>
 
 " From:
 " http://stackoverflow.com/questions/256204/
 " close-file-without-quitting-vim-application
-function! CleanClose(tosave)
-  if (a:tosave == 1)
-    w!
-  endif
-  let todelbufNr = bufnr("%")
-  let newbufNr = bufnr("#")
+function! CleanClose()
+  let todelbufNr = bufnr('%')
+  let newbufNr = bufnr('#')
   if ((newbufNr != -1) && (newbufNr != todelbufNr) && buflisted(newbufNr))
-    exe "b".newbufNr
+    exe 'b'.newbufNr
   else
     bnext
   endif
 
-  if (bufnr("%") == todelbufNr)
+  if (bufnr('%') == todelbufNr)
     new
   endif
-  exe "bd".todelbufNr
+  exe 'bd'.todelbufNr
 endfunction
-
-
-" Append modeline after last line in buffer.
-" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
-" files.
-function! AppendModeline()
-  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d filetype=%s:",
-        \ &tabstop, &shiftwidth, &textwidth)
-  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
-  call append(line("$"), l:modeline)
-endfunction
-nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
-
 
 " Leader q closes window
 nnoremap <Leader>q :q<CR>
-
-" map Esc to øø TODO: remove since never used?
-imap øø <Esc>
-vmap øø <Esc>
 
 " Disable insert when Double mousepad click
 map  <MiddleMouse> <Nop>
@@ -169,7 +116,7 @@ imap <4-MiddleMouse> <Nop>
 " vertical window split
 noremap <leader>v <C-w>v
 
-" horizontal window split 
+" horizontal window split
 noremap <leader>s <C-w>s
 " }}}
 
@@ -186,19 +133,20 @@ if &term =~ "xterm\\|screen-256color|vte-256color|termite"
 endif
 
 " General settings (Need cleanup) {{{
-
-" from zaiste vimrc NEED CLEANUP
-
-
 set hidden " open new file without saving current buffer (no more !-error)
+set smartcase
+
+set listchars=tab:▸\ ,trail:·
+set list
 
 set history=200             " remember commands and search history
 set undolevels=1000         " use many muchos levels of undo
 
+set wildmode=longest,list,full
 set wildmenu
 set ruler
 
-" Ignore certain filetypes (very handy when using command-t) {{{
+" Ignore certain filetypes (very handy when using ctrl+p) {{{
 set wildignore+=*.swp,*.bak,*.*~,*.orig                 " Backup files
 set wildignore+=*.o,*.d,*.obj,*.pyc,*.class,*.exe,*.dll " Binary files
 set wildignore+=*.icns,*.ico,*.icontainer               " Icon files
@@ -212,9 +160,7 @@ set wildignore+=*.po,*.mo,*.pot                         " Translation files
 set wildignore+=*.sln                                   " App specific
 set wildignore+=*.ttf,*.otf                             " Fonts
 set wildignore+=*.mp3,*.m4a                             " Audio
-" Ignore some standard folders aswell
-" Really need a whitelist instead of this, for making command-t useable
-set wildignore+=python-env/**                           " My python virtualenv.
+set wildignore+=*.hi,*.beam                             " Other
 " }}}
 
 set title           " change the terminal's title
@@ -227,18 +173,14 @@ set noerrorbells    " don't beep
 " Vim UI {
 " Highlight current column, and enable toggle.
 set cursorline
-nnoremap <F9> :set nocursorline!<CR> 
+nnoremap <F9> :set nocursorline!<CR>
 set incsearch       " Highlight as you type search phrase.
 set laststatus=2    " Always show the status line.
 set encoding=utf-8  " Necessary to show unicode glyphs
-if has("gui_running")
-  let g:Powerline_symbols = 'fancy'
+
+if !has('gui')
+  set term=$TERM
 endif
-" set list
-
-" set listchars=extends:❯,precedes:❮
-
-set ruler
 set shell=/bin/zsh
 set number          " Turn on line numbers.
 set mouse=a         " Enable mouse in terminal emulators.
@@ -252,37 +194,30 @@ set nosmartindent
 set tabstop=4
 set shiftwidth=4
 set expandtab
-set textwidth=79    " following python's PEP8
+set textwidth=79
 set colorcolumn=80
 set autoindent
 
 " Don't backup files.
 set nobackup
 set noswapfile
-
-" set lazyredraw      " Trying out lazyredraw for imporved performance.
 " }}}
 
-if &t_Co > 2 || has("gui_running")
+if &t_Co > 2 || has('gui_running')
   syntax enable " enable syntax highlighting, when the terminal has colors.
 endif
 
-if &t_Co >= 256 || has("gui_running")
-  "colorscheme mustang          " Alternative theme.
-  " colorscheme molokai
-  " colorscheme badwolf
+if &t_Co >= 256 || has('gui_running')
   set background=dark
-  let g:solarized_termcolors=256 
+  let g:solarized_termcolors=256
   let g:solarized_italic=0
-  " let g:solarized_degraded=0
-  " let g:solarized_bold = 0
   colorscheme solarized
-  set guifont=Terminus\ 8     " Font + size (Awesome WM).
-  " set guifont=Ubuntu\ Mono\ 10  " Font + size (Awesome WM).
-  " set guifont="Source Sans Pro 10"  " Font + size (Awesome WM).
-  let g:enhanceFontName = "Monaco for powerline"
-  
-  " Gvim fixing
+  set guifont=Terminus\ 8
+  " let g:enhanceFontName = 'Monaco'
+endif
+
+" Remove gvim UI
+if has('gui_running')
   set go-=T                     " hide gvim toolbar.
   set go-=m                     " hide gvim menu.
   set guioptions+=LlRrb         " Hide scrollbars,
@@ -292,49 +227,60 @@ endif
 
 " filetype settings {{{
 " Compass/sass
-autocmd FileType css,sass,haml,scss setlocal sw=2 ts=2
+au FileType css,sass,haml,scss setl sw=2 ts=2
+" js
+au FileType javascript,coffee setl sw=2 ts=2
 " vim script
-autocmd FileType vim setlocal sw=2 ts=2
+au FileType vim setl sw=2 ts=2
 "  COMMIT_EDITMSG
-autocmd FileType gitcommit setlocal tw=72 cc=73
+au FileType gitcommit setl tw=72 cc=73
+" gitconfig
+au FileType gitconfig setl ts=8 sts=8 sw=8 noexpandtab
 " html
-autocmd FileType html,htmldjango setlocal sw=2 ts=2 tw=0 cc=0
+au FileType html,htmldjango setl sw=2 ts=2 tw=0 cc=0
+" jade
+au FileType jade setl tw=0 cc=120
 " tex
-autocmd FileType tex setlocal sw=2 ts=2
+au FileType tex setl sw=2 ts=2 makeprg=make\ -C\ %:h
+" Makefile
+au FileType make setl ts=8 sts=8 sw=8 noexpandtab
+" Javascript
+au FileType javascript setl sw=2 ts=2
+" coffeescript
+au FileType coffee setl sw=2 ts=2 tw=80 cc=81
+" YAML
+au FileType yaml setl sw=2 ts=2 tw=80 cc=81
+" Go
+au FileType go setl ts=4 sts=4 sw=4 noexpandtab nolist
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>gl <Plug>(go-lint)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
 " }}}
 
-" This should only be for tex
-set makeprg=make\ -C\ %:h
+" ExtraWhitespace used for go files
+highlight ExtraWhitespace ctermbg=red guibg=#094757
+fun! UpdateMatch()
+    if &ft == 'go'
+        match ExtraWhitespace /\s\+$\|^\t*\zs \+/
+    else
+        match NONE
+    endif
+endfun
+autocmd BufEnter,BufWinEnter * call UpdateMatch()
 
 map <F5> :make<CR>
 
-" Abbrivations {{{1
-iab py# #!/usr/bin/env python
-iab sh# #!/bin/sh
+" Abbrivations
+iab py# #!/usr/bin/python
+iab rb# #!/usr/bin/ruby
+iab node# #!/usr/bin/node
 iab bash# #!/bin/bash
 iab stdio# #include <stdio.h>
-" }}}1
-
-" Vim-latex-settings
-" set grepprg=grep\ -nH\ $*
-" let g:tex_flavor='latex'
-
-" Toggle spell {{{
-" f7 toggle english
-" f8 toggle danish
-func! ToggleSpl( lang ) 
-  if &l:spl =~ '\v(^|,)\V'.escape(a:lang,'\').'\v(,|$)' 
-  "Alternatively, since 'spl' may not contain a comma this also
-  "works: 
-  "if index(split(&l:spl,','),a:lang) != -1 
-    exec 'setl spl-='.a:lang 
-  else 
-    exec 'setl spl+='.a:lang 
-  endif 
-  :setl spell spl 
-endfun 
 
 " Spell languages
-map <f7> :call ToggleSpl('en')<cr> 
-map <f8> :call ToggleSpl('da')<cr>
-" }}}
+map <F7> :setl spell! spelllang=en<CR>
+map <F8> :setl spell! spelllang=da<CR>
