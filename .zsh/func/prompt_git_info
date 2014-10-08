@@ -1,29 +1,50 @@
-__GIT_PROMT_BRANCH_C="%{${fg[blue]}%}"
-__GIT_PROMT_COMMIT_C="%{${fg[red]}%}"
-__GIT_PROMT_STATUS_C="%{${fg[yellow]}%}"
-__GIT_PROMT_SUFFIX_C="%{$reset_color%}"
+if [ -n "$GIT_PROMPT_BRANCH_C" ]; then
+    __GIT_PROMT_BRANCH_C=$GIT_PROMPT_BRANCH_C
+else
+    __GIT_PROMT_BRANCH_C="%{$fg[cyan]%}"
+fi
+
+if [ -n "$GIT_PROMPT_COMMIT_C" ]; then
+    __GIT_PROMT_COMMIT_C=$GIT_PROMPT_COMMIT_C
+else
+    __GIT_PROMT_COMMIT_C="%{$fg[green]%}"
+fi
+
+
+if [ -n "$GIT_PROMPT_STATUS_C" ]; then
+    __GIT_PROMT_STATUS_C=$GIT_PROMPT_STATUS_C
+else
+    __GIT_PROMT_STATUS_C="%{$fg[yellow]%}"
+fi
+
+if [ -n "$GIT_PROMPT_SUFFIX_C" ]; then
+    __GIT_PROMT_SUFFIX_C=$GIT_PROMPT_SUFFIX_C
+else
+    __GIT_PROMT_SUFFIX_C="%{$reset_color%}"
+fi
+
 
 if [ -n "$__CURRENT_GIT_BRANCH" ]; then
-	local s="$__GIT_PROMT_BRANCH_C$__CURRENT_GIT_BRANCH:(\
-%{${fg[red]}%}$__CURRENT_COMMIT\
+    local s="$__GIT_PROMT_BRANCH_C$__CURRENT_GIT_BRANCH:(\
+$__GIT_PROMT_COMMIT_C$__CURRENT_COMMIT\
 $__GIT_PROMT_BRANCH_C) $__GIT_PROMT_STATUS_C"
-	case "$__CURRENT_GIT_BRANCH_STATUS" in
-		ahead)
-		s+="↑"
-		;;
-		diverged)
-		s+="↕"
-		;;
-		behind)
-		s+="↓"
-		;;
-	esac
-	if [ -n "$__CURRENT_GIT_BRANCH_IS_DIRTY" ]; then
-		s+="⚡"
-	fi
-	s+="$__GIT_PROMT_SUFFIX_C"
- 
-	printf "%s" $s
+    case "$__CURRENT_GIT_BRANCH_STATUS" in
+        ahead)
+        s+="↑"
+        ;;
+        diverged)
+        s+="↕"
+        ;;
+        behind)
+        s+="↓"
+        ;;
+    esac
+    if [ -n "$__CURRENT_GIT_BRANCH_IS_DIRTY" ]; then
+        s+="⚡"
+    fi
+    s+="$__GIT_PROMT_SUFFIX_C"
+
+    printf "%s" $s
 fi
 
 # ZSH_THEME_GIT_PROMPT_PREFIX="git:(%{$fg[red]%}"
@@ -32,4 +53,4 @@ fi
 # #ZSH_THEME_GIT_PROMPT_AHEAD_REMOTE="%{$fg[blue]%}) %{$fg[yellow]%}↑%{$reset_color%}"
 # ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
 
-# vim: set ts=4 sw=4 tw=79 filetype=zsh:
+# vim: ts=4 sw=4 tw=79 ft=zsh
