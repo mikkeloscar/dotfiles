@@ -267,3 +267,6 @@ export PATH=/usr/local/gcc-linaro-arm-linux-gnueabihf-4.9-2014.05_linux/bin/:$PA
 # GOPATH
 export GOPATH=$HOME/projects/go
 export PATH=$PATH:$GOPATH/bin
+
+gowork() { cd $HOME/projects/go/src/github.com/mikkeloscar/$1; }
+compctl -W $HOME/projects/go/src/github.com/mikkeloscar/ -/ gowork
