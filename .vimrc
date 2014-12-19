@@ -12,6 +12,7 @@ nmap <F4> :NERDTreeToggle<CR>
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-fugitive'
+Plugin 'editorconfig/editorconfig-vim'
 Plugin 'jiangmiao/auto-pairs'
 let g:AutoPairsShortcutFastWrap = ''
 Plugin 'Valloric/YouCompleteMe'
@@ -45,6 +46,8 @@ Plugin 'evanmiller/nginx-vim-syntax'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'wting/rust.vim'
 Plugin 'fatih/vim-go'
+" let g:go_fmt_command = "goimports"
+let g:go_fmt_fail_silently = 1
 
 " Color schemes
 Plugin 'tomasr/molokai'
@@ -250,21 +253,28 @@ au FileType javascript setl sw=2 ts=2
 au FileType coffee setl sw=2 ts=2 tw=80 cc=81
 " YAML
 au FileType yaml setl sw=2 ts=2 tw=80 cc=81
+" C
+au FileType c setl ts=8 sts=8 sw=8 noexpandtab nolist
 " Go
-au FileType go setl ts=4 sts=4 sw=4 noexpandtab nolist
+au FileType go setl ts=8 sts=8 sw=8 noexpandtab nolist
+au FileType go nmap <Leader>s <Plug>(go-implements)
+au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+" au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>gl <Plug>(go-lint)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
+au FileType go nmap <leader>ds <Plug>(go-def-split)
+au FileType go nmap <leader>gv <Plug>(go-vet)
+au FileType go nmap <leader>gi <Plug>(go-import)
 " }}}
 
 " ExtraWhitespace used for go files
 highlight ExtraWhitespace ctermbg=red guibg=#094757
 fun! UpdateMatch()
-    if &ft == 'go'
+    if &ft == 'go' || &ft == 'c'
         match ExtraWhitespace /\s\+$\|^\t*\zs \+/
     else
         match NONE

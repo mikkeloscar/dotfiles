@@ -145,8 +145,9 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-for_window [class="mplayer2"] floating enable
+# for_window [class="mplayer2"] floating enable
 for_window [class="Steam"] floating enable
+for_window [class="feh"] floating enable
 
 # custom resize
 # bindsym $mod+h resize grow width 10 px or 10 ppt
@@ -155,10 +156,11 @@ for_window [class="Steam"] floating enable
 # finds out, if available)
 bar {
         position top
-        tray_output primary
+        # tray_output primary
+        tray_output DFP7
         status_command i3status
         # status_command ~/.i3/status/status.php
-        
+
         # colors {
         #     focused_workspace #fbad46 #e68702 #ffffff
         # }
@@ -179,9 +181,9 @@ bindsym Print exec scrot
 #
 bindsym $mod+g exec chromium
 # bindsym $mod+minus exec urxvt -e htop
-bindsym $mod+minus exec $term -e htop
-# bindsym $mod+BackSpace exec thunar
-bindsym $mod+BackSpace exec nautilus
+bindsym $mod+h exec $term -e htop
+bindsym $mod+BackSpace exec thunar
+bindsym $mod+dead_acute exec $term -e ranger
 # bindsym $mod+0 exec urxvt -e ncmpcpp
 bindsym $mod+0 exec $term -e ncmpcpp
 bindsym $mod+v exec gvim
@@ -197,9 +199,9 @@ bindsym $mod+p exec mpc toggle
 # bindsym XF86AudioRaiseVolume exec amixer set Master 5+
 # bindsym XF86AudioLowerVolume exec amixer set Master 5-
 # bindsym XF86AudioMute exec amixer set Master toggle
-bindsym XF86AudioRaiseVolume exec vol_up
-bindsym XF86AudioLowerVolume exec vol_down
-bindsym XF86AudioMute exec mute_toggle
+bindsym XF86AudioRaiseVolume exec /usr/bin/pulseaudio-ctl up
+bindsym XF86AudioLowerVolume exec /usr/bin/pulseaudio-ctl down
+bindsym XF86AudioMute exec /usr/bin/pulseaudio-ctl mute
 
 # Media keys bindings
 bindsym XF86AudioNext exec mpc next
@@ -207,5 +209,10 @@ bindsym XF86AudioPrev exec mpc prev
 bindsym XF86AudioStop exec mpc stop
 bindsym XF86AudioPlay exec mpc toggle
 
-bindsym $mod+XF86AudioRaiseVolume exec mpc volume +5
-bindsym $mod+XF86AudioLowerVolume exec mpc volume -5
+# bindsym $mod+XF86AudioRaiseVolume exec mpc volume +5
+# bindsym $mod+XF86AudioLowerVolume exec mpc volume -5
+bindsym $mod+plus exec mpc volume +5
+bindsym $mod+minus exec mpc volume -5
+
+# play youtube-videos in mplayer
+bindsym $mod+y exec mplayer $(youtube-dl -g $(xclip -o))

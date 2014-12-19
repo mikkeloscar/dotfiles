@@ -59,11 +59,14 @@ alias ls='ls --color=auto'
 # http://geoff.greer.fm/lscolors/
 export LS_COLORS='ow=0;44:ln=36;40:'
 
-export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='31'
+
+alias grep='grep --color=auto'
 
 alias pc='sudo pacman'
 alias pcc='pacman'
+
+alias chromium='chromium --ssl-version-min=tls1'
 
 # Webserver
 alias webserver="sudo systemctl start httpd.service mysqld.service"
