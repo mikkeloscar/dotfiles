@@ -1,0 +1,9 @@
+[Unit]
+Description = SSH Proxy for %i
+After = network.target
+ 
+[Service]
+ExecStart = /usr/bin/ssh -D 1080 -N %i -p 22
+ 
+[Install]
+WantedBy = default.target
