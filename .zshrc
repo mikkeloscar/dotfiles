@@ -1,6 +1,6 @@
 HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=1000
+SAVEHIST=1000
 unsetopt HIST_FIND_NO_DUPS
 bindkey -v
 
@@ -49,10 +49,8 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
     zle -N zle-line-finish
 fi
 
-# The following lines were added by compinstall
-zstyle :compinstall filename "/home/$HOME/.zshrc"
-
 autoload -Uz compinit && compinit
+# autoload -Uz compinit && compinit
 autoload -U colors && colors
 
 alias ls='ls --color=auto'
@@ -188,39 +186,39 @@ hosts=(
 zstyle ':completion:*:hosts' hosts $hosts
 
 # Use caching so that commands like apt and dpkg complete are useable
-zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path $OMZ/cache/
+# zstyle ':completion::complete:*' use-cache on
+# zstyle ':completion::complete:*' cache-path $OMZ/cache/
 
 # Fuzzy matching of completions for when you mistype them
-zstyle ':completion:*' completer _complete _match _approximate
-zstyle ':completion:*:match:*' original only
-zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
+# zstyle ':completion:*' completer _complete _match _approximate
+# zstyle ':completion:*:match:*' original only
+# zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
 
 # Ignore completion functions
-zstyle ':completion:*:functions' ignored-patterns '_*'
+# zstyle ':completion:*:functions' ignored-patterns '_*'
 
 # Don't complete uninteresting users
-zstyle ':completion:*:*:*:users' ignored-patterns \
-        adm amanda apache avahi beaglidx bin cacti canna clamav daemon \
-        dbus distcache dovecot fax ftp games gdm gkrellmd gopher \
-        hacluster haldaemon halt hsqldb ident junkbust ldap lp mail \
-        mailman mailnull mldonkey mysql nagios \
-        named netdump news nfsnobody nobody nscd ntp nut nx openvpn \
-        operator pcap postfix postgres privoxy pulse pvm quagga radvd \
-        rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs
+# zstyle ':completion:*:*:*:users' ignored-patterns \
+#         adm amanda apache avahi beaglidx bin cacti canna clamav daemon \
+#         dbus distcache dovecot fax ftp games gdm gkrellmd gopher \
+#         hacluster haldaemon halt hsqldb ident junkbust ldap lp mail \
+#         mailman mailnull mldonkey mysql nagios \
+#         named netdump news nfsnobody nobody nscd ntp nut nx openvpn \
+#         operator pcap postfix postgres privoxy pulse pvm quagga radvd \
+#         rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs
 
 # ... unless we really want to.
-zstyle '*' single-ignored show
+# zstyle '*' single-ignored show
 
-if [ "x$COMPLETION_WAITING_DOTS" = "xtrue" ]; then
-  expand-or-complete-with-dots() {
-    echo -n "\e[31m......\e[0m"
-    zle expand-or-complete
-    zle redisplay
-  }
-  zle -N expand-or-complete-with-dots
-  bindkey "^I" expand-or-complete-with-dots
-fi
+# if [ "x$COMPLETION_WAITING_DOTS" = "xtrue" ]; then
+#   expand-or-complete-with-dots() {
+#     echo -n "\e[31m......\e[0m"
+#     zle expand-or-complete
+#     zle redisplay
+#   }
+#   zle -N expand-or-complete-with-dots
+#   bindkey "^I" expand-or-complete-with-dots
+# fi
 
 # General purpose aliases ---------------------------------------
 # Basic directory operations
@@ -241,35 +239,35 @@ compdef g=git
 alias gst='git status'
 compdef _git gst=git-status
 
-# rvm
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
 # pkgfile
 [ -r /usr/share/doc/pkgfile/command-not-found.zsh ] && . /usr/share/doc/pkgfile/command-not-found.zsh
-
-# python virtualenvwrap
-source /usr/bin/virtualenvwrapper.sh
 
 # Android SDK
 export PATH=${PATH}:android-sdks/tools:android-sdks/platform-tools
 
 export CHROOT_STANDARD=/media/chroots/standard
 
-# # zsh-autosuggestions
-# source ~/.zsh-autosuggestions/autosuggestions.zsh
-#
-# zle-line-init() {
-#     zle autosuggest-start
-# }
-# zle -N zle-line-init
 # export linaro toolchain (gcc 4.9)
 export PATH=/usr/local/gcc-linaro-arm-linux-gnueabihf-4.9-2014.05_linux/bin/:$PATH
-
-. <(npm completion)
 
 # GOPATH
 export GOPATH=$HOME/projects/go
 export PATH=$PATH:$GOPATH/bin
 
+# golang working dir
 gowork() { cd $HOME/projects/go/src/github.com/mikkeloscar/$1; }
 compctl -W $HOME/projects/go/src/github.com/mikkeloscar/ -/ gowork
+
+# Get latest package sources for Arch linux repo packages
+arch_src() {
+    repo="git://projects.archlinux.org/svntogit/packages.git"
+
+    git clone $repo --branch "packages/$1" --single-branch $1
+}
+
+# sourcing shitty scripts (only enable when used, makes startup 7x slower)
+# rvm
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+# python virtualenvwrap
+# source /usr/bin/virtualenvwrapper.sh
