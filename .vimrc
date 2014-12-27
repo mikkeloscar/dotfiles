@@ -82,7 +82,7 @@ imap <F2> <Esc>:bprevious<CR>
 imap <F3> <Esc>:bnext<CR>
 
 " close current buffer
-map <Leader>d :call CleanClose()<CR>
+map <leader>d :call CleanClose()<CR>
 
 " From:
 " http://stackoverflow.com/questions/256204/
@@ -268,7 +268,8 @@ au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
 au FileType go nmap <leader>ds <Plug>(go-def-split)
 au FileType go nmap <leader>gv <Plug>(go-vet)
-au FileType go nmap <leader>gi <Plug>(go-import)
+" au FileType go nmap <leader>gi <Plug>(go-import)
+au FileType go nmap <leader>gi :call go#fmt#Format(1)<CR>:w<CR>
 " }}}
 
 " ExtraWhitespace used for go files
