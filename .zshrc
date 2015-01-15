@@ -136,6 +136,7 @@ RPROMPT="[%{$fg[cyan]%}%?%{$reset_color%}]"
 
 # -------------- custom stuff ----------------------------------
 #
+compdef _pdf atril
 
 # Good stuff from oh-my-zsh
 #
