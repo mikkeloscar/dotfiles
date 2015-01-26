@@ -16,6 +16,9 @@
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 font -*terminus-*-*-*-*-*-*-*-*-*-iso10646-*
 
+# Hide edge border
+hide_edge_borders both
+
 ## Variables
 set $mod Mod4
 set $alt Mod1
@@ -156,7 +159,7 @@ for_window [class="feh"] floating enable
 bar {
         position top
         # tray_output primary
-        tray_output DFP7
+        tray_output DFP5
         status_command i3status
         # status_command ~/.i3/status/status.php
 
