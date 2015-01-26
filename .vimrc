@@ -48,6 +48,8 @@ Plugin 'wting/rust.vim'
 Plugin 'fatih/vim-go'
 " let g:go_fmt_command = "goimports"
 let g:go_fmt_fail_silently = 1
+Plugin 'majutsushi/tagbar'
+nmap <F6> :TagbarToggle<CR>
 
 " Color schemes
 Plugin 'tomasr/molokai'
@@ -229,8 +231,8 @@ endif
 " }}}
 
 " filetype settings {{{
-" Compass/sass
-au FileType css,sass,haml,scss setl sw=2 ts=2
+" css/sass/less
+au FileType css,sass,haml,scss,less setl sw=2 ts=2
 " js
 au FileType javascript,coffee setl sw=2 ts=2
 " vim script
@@ -255,6 +257,10 @@ au FileType coffee setl sw=2 ts=2 tw=80 cc=81
 au FileType yaml setl sw=2 ts=2 tw=80 cc=81
 " C
 au FileType c setl ts=8 sts=8 sw=8 noexpandtab nolist
+" Java
+au FileType java setl ts=8 sts=8 sw=8 noexpandtab nolist
+" ant
+au FileType ant setl sw=2 ts=2
 " Go
 au FileType go setl ts=8 sts=8 sw=8 noexpandtab nolist
 au FileType go nmap <Leader>s <Plug>(go-implements)
@@ -275,7 +281,7 @@ au FileType go nmap <leader>gi :call go#fmt#Format(1)<CR>:w<CR>
 " ExtraWhitespace used for go files
 highlight ExtraWhitespace ctermbg=red guibg=#094757
 fun! UpdateMatch()
-    if &ft == 'go' || &ft == 'c'
+    if &ft == 'go' || &ft == 'c' || &ft == 'java'
         match ExtraWhitespace /\s\+$\|^\t*\zs \+/
     else
         match NONE
