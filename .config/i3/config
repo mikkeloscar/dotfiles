@@ -36,7 +36,7 @@ bindsym $mod+Return exec $term
 bindsym $mod+q kill
 
 # start rofi (program launcher)
-bindsym $mod+d exec rofi -rnow -font "terminus 8" -bg black -fg white -location 1 -lines 2 -bw 0
+bindsym $mod+d exec rofi -show run -font "terminus 8" -bg black -fg white -location 1 -lines 2 -bw 0
 
 # change focus
 bindsym $mod+j focus left
@@ -159,7 +159,8 @@ for_window [class="feh"] floating enable
 bar {
         position top
         # tray_output primary
-        tray_output DFP5
+        # tray_output primary
+        tray_output HDMI-1
         status_command i3status
         # status_command ~/.i3/status/status.php
 
