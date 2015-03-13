@@ -188,10 +188,10 @@ bindsym $mod+h exec $term -e htop
 bindsym $mod+BackSpace exec thunar
 bindsym $mod+dead_acute exec $term -e ranger
 # bindsym $mod+0 exec urxvt -e ncmpcpp
-bindsym $mod+0 exec $term -e ncmpcpp
+bindsym $mod+0 exec $term -e "ncmpcpp -c $XDG_CONFIG_HOME/ncmpcpp/config"
 bindsym $mod+v exec gvim
 # bindsym $mod+i exec urxvt -e weechat-curses
-bindsym $mod+i exec $term -e weechat-curses
+bindsym $mod+i exec $term -e "weechat -d $XDG_CONFIG_HOME/weechat"
 # ranger
 bindsym $mod+dead_diaeresis exec $term -e ranger
 
