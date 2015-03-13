@@ -2,3 +2,6 @@ EDITOR=vim
 PAGER=less
 TERMINAL=termite
 BROWSER=chromium
+TMPDIR=/tmp
+
+STUDIO_JDK=/usr/lib/jvm/java-8-jdk
