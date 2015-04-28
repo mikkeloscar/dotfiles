@@ -229,6 +229,9 @@ arch_src() {
     git clone $repo --branch "packages/$1" --single-branch $1
 }
 
+# get rid of x11-ssh-askpass
+unset SSH_ASKPASS
+
 # sourcing shitty scripts (only enable when used, makes startup 7x slower)
 # rvm
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
