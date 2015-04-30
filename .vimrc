@@ -35,6 +35,8 @@ let g:ctrlp_custom_ignore = {
 Plugin 'scrooloose/syntastic'
 " let g:syntastic_cpp_checkers=['cpp']
 let g:syntastic_cpp_check_header = 1
+" disable asm checker
+let g:syntastic_asm_checkers=['']
 
 " Syntax highlighting
 Plugin 'plasticboy/vim-markdown'
@@ -57,6 +59,12 @@ Plugin 'altercation/vim-colors-solarized'
 
 " stuff
 Plugin 'adimit/prolog.vim'
+
+Plugin 'sudar/vim-arduino-syntax'
+
+Plugin 'Matt-Deacalion/vim-systemd-syntax'
+
+Plugin 'mustache/vim-mustache-handlebars'
 
 call vundle#end()
 filetype plugin indent on
