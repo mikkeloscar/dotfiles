@@ -7,5 +7,3 @@ set follow-fork-mode child
 set history filename ~/.gdbhistory
 set history save
 set history expansion
-# Output format
-set output-radix 0x1
