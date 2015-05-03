@@ -232,6 +232,23 @@ arch_src() {
 # get rid of x11-ssh-askpass
 unset SSH_ASKPASS
 
+# Initialize new github repo
+hubify() {
+    user=$(git config --get github.user)
+    curl -u "$user" https://api.github.com/user/repos -d "{\"name\":\"$1\"}"
+    git remote add origin git@github.com:$user/$1.git
+    git push -u origin master
+}
+
+# Initialize new gitlab repo (private)
+labify() {
+    user="mikkeloscar"
+    token=$(cat ~/.gitlab.token)
+    curl --data "name=$1" --header "PRIVATE-TOKEN: $token" https://gitlab.com/api/v3/projects
+    git remote add origin git@gitlab.com:$user/$1.git
+    git push -u origin master
+}
+
 # sourcing shitty scripts (only enable when used, makes startup 7x slower)
 # rvm
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
