@@ -66,15 +66,7 @@ alias pcc='pacman'
 
 alias chromium='chromium --ssl-version-min=tls1'
 
-# Webserver
-alias webserver="sudo systemctl start httpd.service mysqld.service"
-
-# ATI
-alias atitemp="aticonfig --odgt"
-alias atifan="aticonfig --pplib-cmd 'get fanspeed 0'"
-
-# ssh to diku
-alias diku="ssh mikkell@tyr.diku.dk"
+# ssh proxy to diku
 alias diku-proxy='ssh -C2qTnN -D 8080 mikkell@tyr.diku.dk & chromium --proxy-server="socks5://localhost:8080"'
 
 alias ct-cu="sudo stty -F /dev/ttyUSB0 -crtscts && sudo cu -s 115200 -l /dev/ttyUSB0"
