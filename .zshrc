@@ -66,6 +66,9 @@ alias pcc='pacman'
 
 alias chromium='chromium --ssl-version-min=tls1'
 
+# user nvim in place of vim
+alias vim='nvim'
+
 # ssh proxy to diku
 alias diku-proxy='ssh -C2qTnN -D 8080 mikkell@tyr.diku.dk & chromium --proxy-server="socks5://localhost:8080"'
 
