@@ -192,9 +192,6 @@ set incsearch       " Highlight as you type search phrase.
 set laststatus=2    " Always show the status line.
 set encoding=utf-8  " Necessary to show unicode glyphs
 
-if !has('gui')
-  set term=$TERM
-endif
 set shell=/bin/zsh
 set number          " Turn on line numbers.
 set mouse=a         " Enable mouse in terminal emulators.
