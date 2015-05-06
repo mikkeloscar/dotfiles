@@ -29,6 +29,7 @@ if has('gui_running')
   let g:airline_symbols.branch = "⎇ "
 endif
 Plugin 'kien/ctrlp.vim'
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:ctrlp_custom_ignore = {
   \ 'dir': '\v[\/](node_modules|bower_components|docs|dist)$',
   \ }
@@ -221,8 +222,8 @@ if &t_Co > 2 || has('gui_running')
 endif
 
 if &t_Co >= 256 || has('gui_running')
-  set background=dark
   let g:solarized_termcolors=256
+  set background=dark
   let g:solarized_italic=0
   colorscheme solarized
   set guifont=Terminus\ 8
