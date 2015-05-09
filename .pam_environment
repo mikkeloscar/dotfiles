@@ -1,4 +1,4 @@
-EDITOR=vim
+EDITOR=nvim
 PAGER=less
 TERMINAL=termite
 BROWSER=chromium
