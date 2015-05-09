@@ -7,8 +7,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Plugins
-Plugin 'scrooloose/nerdtree'
-nmap <F4> :NERDTreeToggle<CR>
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-fugitive'
