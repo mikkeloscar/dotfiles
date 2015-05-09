@@ -134,18 +134,6 @@ noremap <leader>v <C-w>v
 noremap <leader>s <C-w>s
 " }}}
 
-" Change cursor color in insert mode
-if &term =~ "xterm\\|screen-256color|vte-256color|termite"
-  " use an orange cursor in insert mode
-  let &t_SI = "\<Esc>]12;orange\x7"
-  " use a red cursor otherwise
-  let &t_EI = "\<Esc>]12;gray\x7"
-  silent !echo -ne "\033]12;gray\007"
-  " reset cursor when vim exits
-  autocmd VimLeave * silent !echo -ne "\033]112\007"
-  " use \003]12;gray\007 for gnome-terminal
-endif
-
 " General settings (Need cleanup) {{{
 set hidden " open new file without saving current buffer (no more !-error)
 set smartcase
@@ -178,11 +166,7 @@ set wildignore+=*.hi,*.beam                             " Other
 " }}}
 
 set title           " change the terminal's title
-autocmd VimEnter * set vb t_vb=
-" set vb t_vb=
-set noerrorbells    " don't beep
-"set vb             " mute spkr
-
+set backspace=indent,eol,start  " more powerful backspacing
 
 " Vim UI {
 " Highlight current column, and enable toggle.
@@ -192,9 +176,6 @@ set incsearch       " Highlight as you type search phrase.
 set laststatus=2    " Always show the status line.
 set encoding=utf-8  " Necessary to show unicode glyphs
 
-if !has('gui')
-  set term=$TERM
-endif
 set shell=/bin/zsh
 set number          " Turn on line numbers.
 set mouse=a         " Enable mouse in terminal emulators.
@@ -221,23 +202,30 @@ if &t_Co > 2 || has('gui_running')
   syntax enable " enable syntax highlighting, when the terminal has colors.
 endif
 
-if &t_Co >= 256 || has('gui_running')
-  let g:solarized_termcolors=256
+if has('nvim')
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+  set background=dark
+  let g:solarized_italic=0
+  colorscheme solarized
+  au VimEnter * colorscheme solarized
+endif
+
+if has('gui_running')
   set background=dark
   let g:solarized_italic=0
   colorscheme solarized
   set guifont=Terminus\ 8
-  " let g:enhanceFontName = 'Monaco'
-endif
 
-" Remove gvim UI
-if has('gui_running')
+  " Remove gvim UI
   set go-=T                     " hide gvim toolbar.
   set go-=m                     " hide gvim menu.
   set guioptions+=LlRrb         " Hide scrollbars,
   set guioptions-=LlRrb         " Gvim need this stupid fix.
 endif
 " }}}
+"
 
 " filetype settings {{{
 " css/sass/less
