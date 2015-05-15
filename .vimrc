@@ -8,7 +8,6 @@ Plugin 'gmarik/Vundle.vim'
 
 " Plugins
 Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-fugitive'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'jiangmiao/auto-pairs'
@@ -36,34 +35,31 @@ Plugin 'scrooloose/syntastic'
 let g:syntastic_cpp_check_header = 1
 " disable asm checker
 let g:syntastic_asm_checkers=['']
+Plugin 'majutsushi/tagbar'
+nmap <F6> :TagbarToggle<CR>
 
-" Syntax highlighting
-Plugin 'plasticboy/vim-markdown'
-let g:vim_markdown_folding_disabled=1
-Plugin 'tpope/vim-haml'
+
+" Syntax highlighting / programming language environments
+Plugin 'tpope/vim-rails'
+Plugin 'rust-lang/rust.vim'
+Plugin 'fatih/vim-go'
+" let g:go_fmt_command = "goimports"
+let g:go_fmt_fail_silently = 1
 Plugin 'digitaltoad/vim-jade'
 Plugin 'groenewege/vim-less'
 Plugin 'evanmiller/nginx-vim-syntax'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'wting/rust.vim'
-Plugin 'fatih/vim-go'
-" let g:go_fmt_command = "goimports"
-let g:go_fmt_fail_silently = 1
-Plugin 'majutsushi/tagbar'
-nmap <F6> :TagbarToggle<CR>
+Plugin 'tpope/vim-haml'
+Plugin 'adimit/prolog.vim'
+Plugin 'sudar/vim-arduino-syntax'
+Plugin 'Matt-Deacalion/vim-systemd-syntax'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'plasticboy/vim-markdown'
+let g:vim_markdown_folding_disabled=1
 
 " Color schemes
 Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
-
-" stuff
-Plugin 'adimit/prolog.vim'
-
-Plugin 'sudar/vim-arduino-syntax'
-
-Plugin 'Matt-Deacalion/vim-systemd-syntax'
-
-Plugin 'mustache/vim-mustache-handlebars'
 
 call vundle#end()
 filetype plugin indent on
