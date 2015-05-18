@@ -245,6 +245,17 @@ labify() {
     git push -u origin master
 }
 
+# Initialize new bitbucket repo (private)
+bitbucket() {
+    user="mikkeloscar"
+    curl -X POST -u $user -H "Content-Type: application/json" \
+        https://api.bitbucket.org/2.0/repositories/$user/$1 \
+        -d '{"scm": "git", "is_private": "true", "fork_policy": "no_public_forks"}'
+    git remote add origin git@bitbucket.org:$user/$1.git
+    git push -u origin --all
+    git push -u origin --tags
+}
+
 # sourcing shitty scripts (only enable when used, makes startup 7x slower)
 # rvm
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
