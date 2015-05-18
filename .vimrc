@@ -160,7 +160,6 @@ set wildignore+=*.hi,*.beam                             " Other
 " }}}
 
 set title           " change the terminal's title
-set backspace=indent,eol,start  " more powerful backspacing
 
 " Vim UI {
 " Highlight current column, and enable toggle.
