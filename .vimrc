@@ -60,6 +60,7 @@ let g:vim_markdown_folding_disabled=1
 " Color schemes
 Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'morhetz/gruvbox'
 
 call vundle#end()
 filetype plugin indent on
@@ -74,7 +75,7 @@ let mapleader = ','
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
-" Easy window navigation (might not work with NERDtree)
+" Easy window navigation
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
@@ -200,15 +201,12 @@ if has('nvim')
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
   set background=dark
-  let g:solarized_italic=0
-  colorscheme solarized
-  au VimEnter * colorscheme solarized
+  colorscheme gruvbox
 endif
 
 if has('gui_running')
   set background=dark
-  let g:solarized_italic=0
-  colorscheme solarized
+  colorscheme gruvbox
   set guifont=Terminus\ 8
 
   " Remove gvim UI
@@ -246,7 +244,7 @@ au FileType coffee setl sw=2 ts=2 tw=80 cc=81
 " YAML
 au FileType yaml setl sw=2 ts=2 tw=80 cc=81
 " C
-au FileType c setl ts=8 sts=8 sw=8 noexpandtab nolist
+au FileType c,cpp setl ts=8 sts=8 sw=8 noexpandtab nolist
 " Java
 au FileType java setl ts=8 sts=8 sw=8 noexpandtab nolist
 " ant
@@ -264,12 +262,11 @@ au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
 au FileType go nmap <leader>ds <Plug>(go-def-split)
 au FileType go nmap <leader>gv <Plug>(go-vet)
-" au FileType go nmap <leader>gi <Plug>(go-import)
 au FileType go nmap <leader>gi :call go#fmt#Format(1)<CR>:w<CR>
 " }}}
 
 " ExtraWhitespace used for go files
-highlight ExtraWhitespace ctermbg=red guibg=#094757
+highlight ExtraWhitespace guibg=#094757
 fun! UpdateMatch()
     if &ft == 'go' || &ft == 'c' || &ft == 'java'
         match ExtraWhitespace /\s\+$\|^\t*\zs \+/
