@@ -31,35 +31,35 @@ browser = /usr/bin/chromium
 # foreground = #d8e3e7
 # background = #000000
 # cursor = #93a1a1
-# 
+#
 # # black dark/light
 # color0 = #111111
 # color8 = #444444
-# 
+#
 # # red dark/light
 # color1 = #dc322f
 # color9 = #cd4b16
-# 
+#
 # # green dark/light
 # color2 = #668e11
 # color10 = #aeee00
-# 
+#
 # # yellow dark/light
 # color3 = #b58900
 # color11 = #ff9900
-# 
+#
 # # blue dark/light
 # color4 = #268bd2
 # color12 = #4bb0f7
-# 
+#
 # # magenta dark/light
 # color5 = #d33682
 # color13 = #6c71c4
-# 
+#
 # # cyan dark/light
 # color6 = #2aa198
 # color14 = #00e1d0
-# 
+#
 # # white dark/light
 # color7 = #eee8d5
 # color15 = #fdf6e3
@@ -127,4 +127,4 @@ color14 = #00e1d0
 color7 = #d8e3e7
 color15 = #fdf6e3
 
-# vim: ft=cfg:
+# vim: ft=conf:
