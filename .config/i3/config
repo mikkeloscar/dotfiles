@@ -39,10 +39,10 @@ bindsym $mod+q kill
 bindsym $mod+d exec rofi -show run -font "terminus 8" -bg black -fg white -hlbg "#1277b1" -hlgf white -location 1 -lines 2 -bw 0 -no-levenshtein-sort
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -51,10 +51,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -183,25 +183,17 @@ bindsym Ctrl+$alt+l exec i3lock -c 000000
 bindsym Print exec scrot
 #
 bindsym $mod+g exec chromium
-# bindsym $mod+minus exec urxvt -e htop
-bindsym $mod+h exec $term -e htop
+# bindsym $mod+h exec $term -e htop
 bindsym $mod+BackSpace exec thunar
 bindsym $mod+dead_acute exec $term -e ranger
-# bindsym $mod+0 exec urxvt -e ncmpcpp
 bindsym $mod+0 exec $term -e "ncmpcpp -c $XDG_CONFIG_HOME/ncmpcpp/config"
 bindsym $mod+v exec gvim
-# bindsym $mod+i exec urxvt -e weechat-curses
 bindsym $mod+i exec $term -e "weechat -d $XDG_CONFIG_HOME/weechat"
-# ranger
-bindsym $mod+dead_diaeresis exec $term -e ranger
 
 # mpd bindings
 bindsym $mod+p exec mpc toggle
 
 # sound bindings (using pulseaudio_ctl from AUR)
-# bindsym XF86AudioRaiseVolume exec amixer set Master 5+
-# bindsym XF86AudioLowerVolume exec amixer set Master 5-
-# bindsym XF86AudioMute exec amixer set Master toggle
 bindsym XF86AudioRaiseVolume exec /usr/bin/pulseaudio-ctl up
 bindsym XF86AudioLowerVolume exec /usr/bin/pulseaudio-ctl down
 bindsym XF86AudioMute exec /usr/bin/pulseaudio-ctl mute
@@ -212,10 +204,11 @@ bindsym XF86AudioPrev exec mpc prev
 bindsym XF86AudioStop exec mpc stop
 bindsym XF86AudioPlay exec mpc toggle
 
-# bindsym $mod+XF86AudioRaiseVolume exec mpc volume +5
-# bindsym $mod+XF86AudioLowerVolume exec mpc volume -5
+# mpd sound control
 bindsym $mod+plus exec mpc volume +5
 bindsym $mod+minus exec mpc volume -5
 
 # play youtube-videos in mplayer
-bindsym $mod+y exec mplayer $(youtube-dl -g $(xclip -o))
+bindsym $mod+y exec mpv $(xclip -o)
+
+# vim:ft=i3
