@@ -48,6 +48,7 @@ let g:go_fmt_fail_silently = 1
 Plugin 'digitaltoad/vim-jade'
 Plugin 'groenewege/vim-less'
 Plugin 'evanmiller/nginx-vim-syntax'
+Plugin 'PotatoesMaster/i3-vim-syntax'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-haml'
 Plugin 'adimit/prolog.vim'
