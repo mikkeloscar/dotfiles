@@ -42,6 +42,7 @@ nmap <F6> :TagbarToggle<CR>
 " Syntax highlighting / programming language environments
 Plugin 'tpope/vim-rails'
 Plugin 'rust-lang/rust.vim'
+Plugin 'cespare/vim-toml'
 Plugin 'fatih/vim-go'
 " let g:go_fmt_command = "goimports"
 let g:go_fmt_fail_silently = 1
@@ -170,6 +171,8 @@ nnoremap <F9> :set nocursorline!<CR>
 set incsearch       " Highlight as you type search phrase.
 set laststatus=2    " Always show the status line.
 set encoding=utf-8  " Necessary to show unicode glyphs
+" disable search highlight
+nnoremap <CR> :noh<CR><CR>
 
 set shell=/bin/zsh
 set number          " Turn on line numbers.
@@ -252,7 +255,7 @@ au FileType java setl ts=8 sts=8 sw=8 noexpandtab nolist
 au FileType ant setl sw=2 ts=2
 " Go
 au FileType go setl ts=8 sts=8 sw=8 noexpandtab nolist
-au FileType go nmap <Leader>s <Plug>(go-implements)
+" au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <Leader>gd <Plug>(go-doc)
 " au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
