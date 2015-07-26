@@ -161,8 +161,9 @@ bar {
         # tray_output primary
         # tray_output primary
         tray_output HDMI-1
+        # tray_output HDMI-0
         status_command i3status
-        # status_command ~/.i3/status/status.php
+        font pango:Terminus, FontAwesome 8
 
         # colors {
         #     focused_workspace #fbad46 #e68702 #ffffff
