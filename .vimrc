@@ -35,6 +35,10 @@ Plugin 'scrooloose/syntastic'
 let g:syntastic_cpp_check_header = 1
 " disable asm checker
 let g:syntastic_asm_checkers=['']
+" disable go checker
+let g:syntastic_go_checkers=['']
+Plugin 'benekastah/neomake'
+au BufWritePost * Neomake!
 Plugin 'majutsushi/tagbar'
 nmap <F6> :TagbarToggle<CR>
 
