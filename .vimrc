@@ -4,7 +4,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 " Plugins
 Plugin 'tpope/vim-commentary'
@@ -41,6 +41,7 @@ Plugin 'benekastah/neomake'
 au BufWritePost * Neomake!
 Plugin 'majutsushi/tagbar'
 nmap <F6> :TagbarToggle<CR>
+Plugin 'gregsexton/MatchTag'
 
 
 " Syntax highlighting / programming language environments
@@ -62,6 +63,7 @@ Plugin 'Matt-Deacalion/vim-systemd-syntax'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
+Plugin 'tfnico/vim-gradle'
 
 " Color schemes
 Plugin 'tomasr/molokai'
@@ -178,6 +180,7 @@ set encoding=utf-8  " Necessary to show unicode glyphs
 " disable search highlight
 nnoremap <CR> :noh<CR><CR>
 
+set shell=/bin/zsh
 set number          " Turn on line numbers.
 set mouse=a         " Enable mouse in terminal emulators.
 set showcmd         " Show the command being typed.
