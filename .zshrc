@@ -63,6 +63,7 @@ alias grep='grep --color=auto'
 
 alias pc='sudo pacman'
 alias pcc='pacman'
+alias pacs='sudo pacman-optimize && sudo reflector --verbose -l 10 --sort rate --save /etc/pacman.d/mirrorlist'
 
 alias chromium='chromium --ssl-version-min=tls1'
 
@@ -75,6 +76,8 @@ alias diku-proxy='ssh -C2qTnN -D 8080 mikkell@tyr.diku.dk & chromium --proxy-ser
 
 alias ct-cu="sudo stty -F /dev/ttyUSB0 -crtscts && sudo cu -s 115200 -l /dev/ttyUSB0"
 
+alias django="source /usr/bin/virtualenvwrapper.sh && workon django"
+
 # cd up dir
 alias u="cd .."
 alias uu="cd ../.."
@@ -82,10 +85,13 @@ alias uuu="cd ../../.."
 
 # static webserver
 alias static="python -m http.server 3001"
+alias calc='python -ic "from math import *; import cmath"'
 
 # Paste services
 alias ix="curl -sF 'f:1=<-' ix.io"
 alias sprunge='curl -F "sprunge=<-" http://sprunge.us'
+
+alias steam="LD_PRELOAD='/usr/lib32/libstdc++.so.6' steam"
 
 # less coloring
 export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -217,6 +223,10 @@ export PATH=$PATH:$GOPATH/bin
 # golang working dir
 gowork() { cd $HOME/projects/go/src/github.com/mikkeloscar/$1; }
 compctl -W $HOME/projects/go/src/github.com/mikkeloscar/ -/ gowork
+
+# golang (gitlab) working dir
+goworklab() { cd $HOME/projects/go/src/gitlab.com/mikkeloscar/$1; }
+compctl -W $HOME/projects/go/src/gitlab.com/mikkeloscar/ -/ goworklab
 
 # Get latest package sources for Arch linux repo packages
 arch_src() {
