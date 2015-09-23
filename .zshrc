@@ -83,6 +83,8 @@ alias u="cd .."
 alias uu="cd ../.."
 alias uuu="cd ../../.."
 
+    # alias deluge="ssh pluto 'deluged' && deluge"
+
 # static webserver
 alias static="python -m http.server 3001"
 alias calc='python -ic "from math import *; import cmath"'
@@ -241,7 +243,8 @@ unset SSH_ASKPASS
 # Initialize new github repo
 hubify() {
     user=$(git config --get github.user)
-    curl -u "$user" https://api.github.com/user/repos -d "{\"name\":\"$1\"}"
+    token=$(cat ~/.github.token)
+    curl -H "Authorization: token $token" https://api.github.com/user/repos -d "{\"name\":\"$1\"}"
     git remote add origin git@github.com:$user/$1.git
     git push -u origin master
 }
