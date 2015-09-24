@@ -36,7 +36,7 @@ bindsym $mod+Return exec $term
 bindsym $mod+q kill
 
 # start rofi (program launcher)
-bindsym $mod+d exec rofi -show run -font "terminus 8" -bg black -fg white -hlbg "#1277b1" -hlgf white -location 1 -lines 2 -bw 0 -no-levenshtein-sort
+bindsym $mod+d exec rofi -show run -font "terminus 8" -bg black -fg white -hlbg "#1277b1" -hlgf white -location 1 -lines 2 -bw 0 -no-levenshtein-sort -lazy-filter-limit 5500
 
 # change focus
 bindsym $mod+h focus left
@@ -160,7 +160,7 @@ bar {
         position top
         # tray_output primary
         # tray_output primary
-        tray_output HDMI-1
+        tray_output DVI-1
         # tray_output HDMI-0
         status_command i3status
         font pango:Terminus, FontAwesome 8
