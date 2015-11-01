@@ -180,7 +180,6 @@ set encoding=utf-8  " Necessary to show unicode glyphs
 " disable search highlight
 nnoremap <CR> :noh<CR><CR>
 
-set shell=/bin/zsh
 set number          " Turn on line numbers.
 set mouse=a         " Enable mouse in terminal emulators.
 set showcmd         " Show the command being typed.
