@@ -20,6 +20,7 @@ Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'bling/vim-airline'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline_symbols = get(g:, 'airline_symbols', {})
 if has('gui_running')
   let g:airline_symbols.space = "\u3000"
@@ -64,6 +65,7 @@ Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
 Plugin 'tfnico/vim-gradle'
+Plugin 'peterhoeg/vim-qml'
 
 " Color schemes
 Plugin 'tomasr/molokai'
