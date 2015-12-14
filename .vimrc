@@ -247,7 +247,7 @@ au FileType jade setl tw=0 cc=120
 " tex
 au FileType tex setl sw=2 ts=2 makeprg=make\ -C\ %:h
 " Makefile
-au FileType make setl ts=8 sts=8 sw=8 noexpandtab
+au FileType make,cmake setl ts=8 sts=8 sw=8 noexpandtab nolist
 " Javascript
 au FileType javascript setl sw=2 ts=2
 " coffeescript
@@ -279,7 +279,7 @@ au FileType go nmap <leader>gi :call go#fmt#Format(1)<CR>:w<CR>
 " ExtraWhitespace used for go files
 highlight ExtraWhitespace guibg=#094757
 fun! UpdateMatch()
-    if &ft == 'go' || &ft == 'c' || &ft == 'java'
+    if &ft == 'go' || &ft == 'c' || &ft == 'java' || &ft == 'make' || &ft == 'cmake'
         match ExtraWhitespace /\s\+$\|^\t*\zs \+/
     else
         match NONE
