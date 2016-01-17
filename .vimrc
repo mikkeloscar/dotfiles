@@ -14,6 +14,7 @@ Plugin 'jiangmiao/auto-pairs'
 let g:AutoPairsShortcutFastWrap = ''
 Plugin 'Valloric/YouCompleteMe'
 set completeopt=menuone
+Plugin 'rdnetto/YCM-Generator'
 " let g:ycm_add_preview_to_completeopt = 0
 " let g:ycm_autoclose_preview_window_after_completion = 1
 Plugin 'michaeljsmith/vim-indent-object'
@@ -234,6 +235,8 @@ endif
 au FileType css,sass,haml,scss,less setl sw=2 ts=2
 " js
 au FileType javascript,coffee setl sw=2 ts=2
+" json
+au FileType json setl sw=2 ts=2
 " vim script
 au FileType vim setl sw=2 ts=2
 "  COMMIT_EDITMSG
