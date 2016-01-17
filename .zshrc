@@ -92,6 +92,7 @@ alias calc='python -ic "from math import *; import cmath"'
 # Paste services
 alias ix="curl -sF 'f:1=<-' ix.io"
 alias sprunge='curl -F "sprunge=<-" http://sprunge.us'
+alias pb='curl -F c=@- https://ptpb.pw'
 
 alias steam="LD_PRELOAD='/usr/lib32/libstdc++.so.6' steam"
 
@@ -103,6 +104,11 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;44;30m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
+
+terminfo() {
+    ssh $1 mkdir -p .terminfo/x
+    scp /usr/share/terminfo/x/xterm-termite $1:~/.terminfo/x/
+}
 
 
 # # ----- GIT STATUS SCRIPT -------
@@ -205,15 +211,16 @@ alias ll='ls -l'
 alias sl=ls # often screw this up
 
 # git
-alias g='git'
-compdef g=git
+# alias g='git'
+# compdef g=git
+alias git=hub
 alias gst='git status'
 compdef _git gst=git-status
 
 # pkgfile
 [ -r /usr/share/doc/pkgfile/command-not-found.zsh ] && . /usr/share/doc/pkgfile/command-not-found.zsh
 
-export CHROOT_STANDARD=/media/chroots/standard
+# export CHROOT_STANDARD=/media/chroots/standard
 
 # export linaro toolchain (gcc 4.9)
 export PATH=/usr/local/gcc-linaro-arm-linux-gnueabihf-4.9-2014.05_linux/bin/:$PATH
