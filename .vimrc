@@ -1,24 +1,35 @@
-set nocompatible    " required
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+if 0 | endif
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+if has('vim_starting')
+  if &compatible
+    set nocompatible               " Be iMproved
+  endif
 
-" Plugins
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-fugitive'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'jiangmiao/auto-pairs'
+  " Required:
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/vimproc.vim'
+
+" NeoBundles
+NeoBundle 'tpope/vim-commentary'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'editorconfig/editorconfig-vim'
+NeoBundle 'jiangmiao/auto-pairs'
 let g:AutoPairsShortcutFastWrap = ''
-Plugin 'Valloric/YouCompleteMe'
+NeoBundle 'Valloric/YouCompleteMe'
 set completeopt=menuone
-Plugin 'rdnetto/YCM-Generator'
+let g:ycm_complete_in_comments = 1
+let g:ycm_confirm_extra_conf = 0
+NeoBundle 'rdnetto/YCM-Generator'
 " let g:ycm_add_preview_to_completeopt = 0
 " let g:ycm_autoclose_preview_window_after_completion = 1
-Plugin 'michaeljsmith/vim-indent-object'
-Plugin 'bling/vim-airline'
+NeoBundle 'michaeljsmith/vim-indent-object'
+NeoBundle 'bling/vim-airline'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
@@ -27,55 +38,47 @@ if has('gui_running')
   let g:airline_symbols.space = "\u3000"
   let g:airline_symbols.branch = "⎇ "
 endif
-Plugin 'kien/ctrlp.vim'
+NeoBundle 'kien/ctrlp.vim'
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:ctrlp_custom_ignore = {
   \ 'dir': '\v[\/](node_modules|bower_components|docs|dist)$',
   \ }
-Plugin 'scrooloose/syntastic'
-" let g:syntastic_cpp_checkers=['cpp']
-let g:syntastic_cpp_check_header = 1
-" disable asm checker
-let g:syntastic_asm_checkers=['']
-" disable go checker
-let g:syntastic_go_checkers=['']
-Plugin 'benekastah/neomake'
+NeoBundle 'benekastah/neomake'
 au BufWritePost * Neomake!
-Plugin 'majutsushi/tagbar'
+NeoBundle 'majutsushi/tagbar'
 nmap <F6> :TagbarToggle<CR>
-Plugin 'gregsexton/MatchTag'
+NeoBundle 'gregsexton/MatchTag'
 
 
 " Syntax highlighting / programming language environments
-Plugin 'tpope/vim-rails'
-Plugin 'rust-lang/rust.vim'
-Plugin 'cespare/vim-toml'
-Plugin 'fatih/vim-go'
+NeoBundle 'tpope/vim-rails'
+NeoBundle 'rust-lang/rust.vim'
+NeoBundle 'cespare/vim-toml'
+NeoBundle 'fatih/vim-go'
 " let g:go_fmt_command = "goimports"
 let g:go_fmt_fail_silently = 1
-Plugin 'digitaltoad/vim-jade'
-Plugin 'groenewege/vim-less'
-Plugin 'evanmiller/nginx-vim-syntax'
-Plugin 'PotatoesMaster/i3-vim-syntax'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'tpope/vim-haml'
-Plugin 'adimit/prolog.vim'
-Plugin 'sudar/vim-arduino-syntax'
-Plugin 'Matt-Deacalion/vim-systemd-syntax'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'plasticboy/vim-markdown'
+NeoBundle 'digitaltoad/vim-jade'
+NeoBundle 'groenewege/vim-less'
+NeoBundle 'evanmiller/nginx-vim-syntax'
+NeoBundle 'PotatoesMaster/i3-vim-syntax'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'tpope/vim-haml'
+NeoBundle 'adimit/prolog.vim'
+NeoBundle 'sudar/vim-arduino-syntax'
+NeoBundle 'Matt-Deacalion/vim-systemd-syntax'
+NeoBundle 'mustache/vim-mustache-handlebars'
+NeoBundle 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
-Plugin 'tfnico/vim-gradle'
-Plugin 'peterhoeg/vim-qml'
+NeoBundle 'tfnico/vim-gradle'
+NeoBundle 'peterhoeg/vim-qml'
 
 " Color schemes
-Plugin 'tomasr/molokai'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'morhetz/gruvbox'
+NeoBundle 'tomasr/molokai'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'morhetz/gruvbox'
 
-call vundle#end()
+call neobundle#end()
 filetype plugin indent on
-
 
 " General mappings {{{
 
