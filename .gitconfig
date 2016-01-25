@@ -7,10 +7,9 @@
 [core]
 	quotepath = false
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	excludesfile = /home/moscar/.gitignore_global
 [color]
 	ui = true
-[credential]
-	helper = cache
 [push]
 	default = simple
 [alias]
@@ -26,3 +25,5 @@
 	smtpserver = smtp.gmail.com
 	smtpuser = mikkeloscar@gmail.com
 	smtpserverport = 587
+[credential]
+	helper = store
