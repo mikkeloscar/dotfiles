@@ -65,8 +65,6 @@ alias pc='sudo pacman'
 alias pcc='pacman'
 alias pacs='sudo pacman-optimize && sudo reflector --verbose -l 10 --sort rate --save /etc/pacman.d/mirrorlist'
 
-alias chromium='chromium --ssl-version-min=tls1'
-
 # user nvim in place of vim
 alias vim='nvim'
 alias vimdiff='nvim -d'
