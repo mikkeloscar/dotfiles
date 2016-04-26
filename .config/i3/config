@@ -189,7 +189,7 @@ bindsym $mod+BackSpace exec thunar
 bindsym $mod+dead_acute exec $term -e ranger
 bindsym $mod+0 exec $term -e "ncmpcpp -c $XDG_CONFIG_HOME/ncmpcpp/config"
 bindsym $mod+v exec gvim
-bindsym $mod+i exec $term -e "weechat -d $XDG_CONFIG_HOME/weechat"
+bindsym $mod+i exec $term -e "mosh scw -- tmux a -t irc"
 
 # mpd bindings
 bindsym $mod+p exec mpc toggle
@@ -209,7 +209,5 @@ bindsym XF86AudioPlay exec mpc toggle
 bindsym $mod+plus exec mpc volume +5
 bindsym $mod+minus exec mpc volume -5
 
-# play youtube-videos in mplayer
+# play youtube-videos in mpv
 bindsym $mod+y exec mpv $(xclip -o)
-
-# vim:ft=i3
