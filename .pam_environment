@@ -3,5 +3,6 @@ PAGER=less
 TERMINAL=termite
 BROWSER=chromium
 TMPDIR=/tmp
+XKB_DEFAULT_LAYOUT=dk
 
 STUDIO_JDK=/usr/lib/jvm/java-8-jdk
