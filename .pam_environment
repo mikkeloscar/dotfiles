@@ -6,3 +6,4 @@ TMPDIR=/tmp
 XKB_DEFAULT_LAYOUT=dk
 
 STUDIO_JDK=/usr/lib/jvm/java-8-jdk
+_JAVA_AWT_WM_NONREPARENTING=1
