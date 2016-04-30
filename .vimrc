@@ -1,35 +1,28 @@
-if 0 | endif
-
-if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
-
-  " Required:
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+if &compatible
+  set nocomplatible
 endif
+set runtimepath^=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
-call neobundle#begin(expand('~/.vim/bundle/'))
+call dein#begin(expand('~/.vim/dein'))
+call dein#add('Shougo/dein.vim')
 
-" Let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc.vim'
-
-" NeoBundles
-NeoBundle 'tpope/vim-commentary'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'editorconfig/editorconfig-vim'
-NeoBundle 'jiangmiao/auto-pairs'
+call dein#add('tpope/vim-commentary')
+call dein#add('tpope/vim-fugitive')
+call dein#add('editorconfig/editorconfig-vim')
+call dein#add('jiangmiao/auto-pairs')
 let g:AutoPairsShortcutFastWrap = ''
-NeoBundle 'Valloric/YouCompleteMe'
+
+call dein#add('Valloric/YouCompleteMe')
 set completeopt=menuone
 let g:ycm_complete_in_comments = 1
 let g:ycm_confirm_extra_conf = 0
-NeoBundle 'rdnetto/YCM-Generator'
+
+call dein#add('rdnetto/YCM-Generator')
 " let g:ycm_add_preview_to_completeopt = 0
 " let g:ycm_autoclose_preview_window_after_completion = 1
-NeoBundle 'michaeljsmith/vim-indent-object'
-NeoBundle 'bling/vim-airline'
+call dein#add('michaeljsmith/vim-indent-object')
+call dein#add('vim-airline/vim-airline')
+call dein#add('vim-airline/vim-airline-themes')
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
@@ -38,47 +31,57 @@ if has('gui_running')
   let g:airline_symbols.space = "\u3000"
   let g:airline_symbols.branch = "⎇ "
 endif
-NeoBundle 'kien/ctrlp.vim'
+
+call dein#add('kien/ctrlp.vim')
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:ctrlp_custom_ignore = {
   \ 'dir': '\v[\/](node_modules|bower_components|docs|dist)$',
   \ }
-NeoBundle 'benekastah/neomake'
-au BufWritePost * Neomake!
-NeoBundle 'majutsushi/tagbar'
-nmap <F6> :TagbarToggle<CR>
-NeoBundle 'gregsexton/MatchTag'
 
+call dein#add('benekastah/neomake')
+au BufWritePost * Neomake!
+
+call dein#add('majutsushi/tagbar')
+nmap <F6> :TagbarToggle<CR>
+
+call dein#add('gregsexton/MatchTag')
 
 " Syntax highlighting / programming language environments
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'rust-lang/rust.vim'
-NeoBundle 'cespare/vim-toml'
-NeoBundle 'fatih/vim-go'
-" let g:go_fmt_command = "goimports"
+call dein#add('tpope/vim-rails')
+call dein#add('rust-lang/rust.vim')
+call dein#add('cespare/vim-toml')
+call dein#add('fatih/vim-go')
 let g:go_fmt_fail_silently = 1
-NeoBundle 'digitaltoad/vim-jade'
-NeoBundle 'groenewege/vim-less'
-NeoBundle 'evanmiller/nginx-vim-syntax'
-NeoBundle 'PotatoesMaster/i3-vim-syntax'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'tpope/vim-haml'
-NeoBundle 'adimit/prolog.vim'
-NeoBundle 'sudar/vim-arduino-syntax'
-NeoBundle 'Matt-Deacalion/vim-systemd-syntax'
-NeoBundle 'mustache/vim-mustache-handlebars'
-NeoBundle 'plasticboy/vim-markdown'
+
+call dein#add('digitaltoad/vim-jade')
+call dein#add('groenewege/vim-less')
+call dein#add('evanmiller/nginx-vim-syntax')
+call dein#add('PotatoesMaster/i3-vim-syntax')
+call dein#add('kchmck/vim-coffee-script')
+call dein#add('tpope/vim-haml')
+call dein#add('adimit/prolog.vim')
+call dein#add('sudar/vim-arduino-syntax')
+call dein#add('Matt-Deacalion/vim-systemd-syntax')
+call dein#add('mustache/vim-mustache-handlebars')
+call dein#add('plasticboy/vim-markdown')
 let g:vim_markdown_folding_disabled=1
-NeoBundle 'tfnico/vim-gradle'
-NeoBundle 'peterhoeg/vim-qml'
+
+call dein#add('tfnico/vim-gradle')
+call dein#add('peterhoeg/vim-qml')
+call dein#add('dag/vim-fish')
 
 " Color schemes
-NeoBundle 'tomasr/molokai'
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'morhetz/gruvbox'
+call dein#add('tomasr/molokai')
+call dein#add('altercation/vim-colors-solarized')
+call dein#add('morhetz/gruvbox')
+call dein#end()
 
-call neobundle#end()
 filetype plugin indent on
+
+if dein#check_install()
+  call dein#install()
+endif
+
 
 " General mappings {{{
 
