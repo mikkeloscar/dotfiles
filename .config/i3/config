@@ -161,7 +161,6 @@ bar {
         # tray_output primary
         # tray_output primary
         tray_output DVI-1
-        # tray_output HDMI-0
         status_command i3status
         font pango:Terminus, FontAwesome 8
 
@@ -188,7 +187,6 @@ bindsym $mod+g exec chromium
 bindsym $mod+BackSpace exec thunar
 bindsym $mod+dead_acute exec $term -e ranger
 bindsym $mod+0 exec $term -e "ncmpcpp -c $XDG_CONFIG_HOME/ncmpcpp/config"
-bindsym $mod+v exec gvim
 bindsym $mod+i exec $term -e "mosh scw -- tmux a -t irc"
 
 # mpd bindings
