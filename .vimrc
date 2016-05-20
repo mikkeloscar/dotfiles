@@ -1,28 +1,32 @@
-if &compatible
-  set nocomplatible
-endif
-set runtimepath^=~/.vim/dein/repos/github.com/Shougo/dein.vim
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-call dein#begin(expand('~/.vim/dein'))
-call dein#add('Shougo/dein.vim')
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
-call dein#add('tpope/vim-commentary')
-call dein#add('tpope/vim-fugitive')
-call dein#add('editorconfig/editorconfig-vim')
-call dein#add('jiangmiao/auto-pairs')
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'jiangmiao/auto-pairs'
 let g:AutoPairsShortcutFastWrap = ''
 
-call dein#add('Valloric/YouCompleteMe')
+Plugin 'Valloric/YouCompleteMe'
 set completeopt=menuone
 let g:ycm_complete_in_comments = 1
 let g:ycm_confirm_extra_conf = 0
 
-call dein#add('rdnetto/YCM-Generator')
+Plugin 'rdnetto/YCM-Generator'
 " let g:ycm_add_preview_to_completeopt = 0
 " let g:ycm_autoclose_preview_window_after_completion = 1
-call dein#add('michaeljsmith/vim-indent-object')
-call dein#add('vim-airline/vim-airline')
-call dein#add('vim-airline/vim-airline-themes')
+Plugin 'michaeljsmith/vim-indent-object'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
@@ -32,56 +36,51 @@ if has('gui_running')
   let g:airline_symbols.branch = "⎇ "
 endif
 
-call dein#add('kien/ctrlp.vim')
+Plugin 'kien/ctrlp.vim'
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:ctrlp_custom_ignore = {
   \ 'dir': '\v[\/](node_modules|bower_components|docs|dist)$',
   \ }
 
-call dein#add('benekastah/neomake')
+Plugin 'benekastah/neomake'
 au BufWritePost * Neomake!
 
-call dein#add('majutsushi/tagbar')
+Plugin 'majutsushi/tagbar'
 nmap <F6> :TagbarToggle<CR>
 
-call dein#add('gregsexton/MatchTag')
+Plugin 'gregsexton/MatchTag'
 
 " Syntax highlighting / programming language environments
-call dein#add('tpope/vim-rails')
-call dein#add('rust-lang/rust.vim')
-call dein#add('cespare/vim-toml')
-call dein#add('fatih/vim-go')
+Plugin 'tpope/vim-rails'
+Plugin 'rust-lang/rust.vim'
+Plugin 'cespare/vim-toml'
+Plugin 'fatih/vim-go'
 let g:go_fmt_fail_silently = 1
 
-call dein#add('digitaltoad/vim-jade')
-call dein#add('groenewege/vim-less')
-call dein#add('evanmiller/nginx-vim-syntax')
-call dein#add('PotatoesMaster/i3-vim-syntax')
-call dein#add('kchmck/vim-coffee-script')
-call dein#add('tpope/vim-haml')
-call dein#add('adimit/prolog.vim')
-call dein#add('sudar/vim-arduino-syntax')
-call dein#add('Matt-Deacalion/vim-systemd-syntax')
-call dein#add('mustache/vim-mustache-handlebars')
-call dein#add('plasticboy/vim-markdown')
+Plugin 'digitaltoad/vim-jade'
+Plugin 'groenewege/vim-less'
+Plugin 'evanmiller/nginx-vim-syntax'
+Plugin 'PotatoesMaster/i3-vim-syntax'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'tpope/vim-haml'
+Plugin 'adimit/prolog.vim'
+Plugin 'sudar/vim-arduino-syntax'
+Plugin 'Matt-Deacalion/vim-systemd-syntax'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
 
-call dein#add('tfnico/vim-gradle')
-call dein#add('peterhoeg/vim-qml')
-call dein#add('dag/vim-fish')
+Plugin 'tfnico/vim-gradle'
+Plugin 'peterhoeg/vim-qml'
+Plugin 'dag/vim-fish'
 
 " Color schemes
-call dein#add('tomasr/molokai')
-call dein#add('altercation/vim-colors-solarized')
-call dein#add('morhetz/gruvbox')
-call dein#end()
+Plugin 'tomasr/molokai'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'morhetz/gruvbox'
 
+call vundle#end()
 filetype plugin indent on
-
-if dein#check_install()
-  call dein#install()
-endif
-
 
 " General mappings {{{
 
