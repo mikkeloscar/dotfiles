@@ -26,3 +26,5 @@
 	smtpserverport = 587
 [credential]
 	helper = store
+[commit]
+	gpgsign = true
