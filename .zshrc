@@ -53,6 +53,9 @@ autoload -Uz compinit && compinit
 # autoload -Uz compinit && compinit
 autoload -U colors && colors
 
+# sync history
+setopt hist_ignore_dups share_history inc_append_history extended_history
+
 alias ls='ls --color=auto'
 # http://geoff.greer.fm/lscolors/
 export LS_COLORS='ow=0;44:ln=36;40:'
