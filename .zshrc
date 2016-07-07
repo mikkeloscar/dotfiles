@@ -2,6 +2,7 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 unsetopt HIST_FIND_NO_DUPS
+setopt append_history share_history
 bindkey -v
 
 #-- Key bindings --#
@@ -52,9 +53,6 @@ fi
 autoload -Uz compinit && compinit
 # autoload -Uz compinit && compinit
 autoload -U colors && colors
-
-# sync history
-setopt hist_ignore_dups share_history inc_append_history extended_history
 
 alias ls='ls --color=auto'
 # http://geoff.greer.fm/lscolors/
