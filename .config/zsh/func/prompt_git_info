@@ -1,13 +1,13 @@
 if [ -n "$GIT_PROMPT_BRANCH_C" ]; then
     __GIT_PROMT_BRANCH_C=$GIT_PROMPT_BRANCH_C
 else
-    __GIT_PROMT_BRANCH_C="%{$fg[cyan]%}"
+    __GIT_PROMT_BRANCH_C="%{$fg[blue]%}"
 fi
 
 if [ -n "$GIT_PROMPT_COMMIT_C" ]; then
     __GIT_PROMT_COMMIT_C=$GIT_PROMPT_COMMIT_C
 else
-    __GIT_PROMT_COMMIT_C="%{$fg[green]%}"
+    __GIT_PROMT_COMMIT_C="%{$fg_bold[green]%}"
 fi
 
 
@@ -23,10 +23,12 @@ else
     __GIT_PROMT_SUFFIX_C="%{$reset_color%}"
 fi
 
+__RESET_C="%{$reset_color%}"
+
 
 if [ -n "$__CURRENT_GIT_BRANCH" ]; then
-    local s="$__GIT_PROMT_BRANCH_C$__CURRENT_GIT_BRANCH:(\
-$__GIT_PROMT_COMMIT_C$__CURRENT_COMMIT\
+    local s="$__GIT_PROMT_BRANCH_C$__CURRENT_GIT_BRANCH:($__RESET_C\
+$__GIT_PROMT_COMMIT_C$__CURRENT_COMMIT$__RESET_C\
 $__GIT_PROMT_BRANCH_C) $__GIT_PROMT_STATUS_C"
     case "$__CURRENT_GIT_BRANCH_STATUS" in
         ahead)

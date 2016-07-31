@@ -79,6 +79,7 @@ Plugin 'dag/vim-fish'
 Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'morhetz/gruvbox'
+let g:gruvbox_contrast_dark='hard'
 
 call vundle#end()
 filetype plugin indent on
