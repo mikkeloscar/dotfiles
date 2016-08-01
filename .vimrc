@@ -4,10 +4,7 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'tpope/vim-commentary'
@@ -50,6 +47,7 @@ Plugin 'majutsushi/tagbar'
 nmap <F6> :TagbarToggle<CR>
 
 Plugin 'gregsexton/MatchTag'
+Plugin 'jamessan/vim-gnupg'
 
 " Syntax highlighting / programming language environments
 Plugin 'tpope/vim-rails'
@@ -274,7 +272,8 @@ au FileType ant setl sw=2 ts=2
 au FileType go setl ts=8 sts=8 sw=8 noexpandtab nolist
 " au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)
-au FileType go nmap <Leader>gd <Plug>(go-doc)
+" au FileType go nmap <Leader>gd <Plug>(go-doc)
+" au FileType go nmap <Leader>gd <Plug>(go-decls)
 " au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>gl <Plug>(go-lint)
