@@ -55,8 +55,6 @@ autoload -Uz compinit && compinit
 autoload -U colors && colors
 
 alias ls='ls --color=auto'
-# http://geoff.greer.fm/lscolors/
-export LS_COLORS='ow=0;44:ln=36;40:'
 
 export GREP_COLOR='31'
 
