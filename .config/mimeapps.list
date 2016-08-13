@@ -1,0 +1,14 @@
+[Default Applications]
+application/pdf=atril.desktop;
+x-scheme-handler/http=chromium.desktop;
+x-scheme-handler/https=chromium.desktop;
+application/pdf=atril.desktop;
+application/x-7z-compressed=engrampa.desktop;
+application/x-compressed-tar=engrampa.desktop;
+application/x-xz-compressed-tar=engrampa.desktop;
+application/zip=engrampa.desktop;
+audio/mp4=mpv.desktop;
+audio/mpeg=mpv.desktop;
+video/mp4=mpv.desktop;
+video/x-matroska=mpv.desktop;vlc.desktop;
+video/x-msvideo=mpv.desktop;
