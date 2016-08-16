@@ -6,6 +6,13 @@ setopt append_history share_history
 bindkey -v
 
 #-- Key bindings --#
+#
+
+source ~/.config/zsh/func/zsh-history-substring-search.zsh
+
+zmodload zsh/terminfo
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
 
 bindkey '^R' history-incremental-search-backward
 bindkey '^S' history-incremental-search-forward
@@ -79,8 +86,6 @@ alias django="source /usr/bin/virtualenvwrapper.sh && workon django"
 alias u="cd .."
 alias uu="cd ../.."
 alias uuu="cd ../../.."
-
-    # alias deluge="ssh pluto 'deluged' && deluge"
 
 # static webserver
 alias static="python -m http.server 3001"
@@ -225,6 +230,11 @@ export PATH=/usr/local/gcc-linaro-arm-linux-gnueabihf-4.9-2014.05_linux/bin/:$PA
 # GOPATH
 export GOPATH=$HOME/projects/go
 export PATH=$PATH:$GOPATH/bin
+
+gocover () {
+    t="/tmp/go-cover.$$.tmp"
+    go test -coverprofile=$t $@ && go tool cover -html=$t && unlink $t
+}
 
 # golang working dir
 gowork() { cd $HOME/projects/go/src/github.com/mikkeloscar/$1; }
