@@ -1,8 +1,9 @@
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 unsetopt HIST_FIND_NO_DUPS
-setopt append_history share_history
+# setopt append_history share_history
+setopt append_history no_inc_append_history no_share_history
 bindkey -v
 
 #-- Key bindings --#
