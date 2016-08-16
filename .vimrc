@@ -233,7 +233,10 @@ if has('gui_running')
   set guioptions-=LlRrb         " Gvim need this stupid fix.
 endif
 " }}}
-"
+
+
+" mark Jenkinsfile as groovy filetype
+au BufReadPost Jenkinsfile set syntax=groovy
 
 " filetype settings {{{
 " css/sass/less
