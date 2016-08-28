@@ -233,23 +233,18 @@ compdef _git gst=git-status
 # pkgfile
 [ -r /usr/share/doc/pkgfile/command-not-found.zsh ] && . /usr/share/doc/pkgfile/command-not-found.zsh
 
-# export CHROOT_STANDARD=/media/chroots/standard
-
-# export linaro toolchain (gcc 4.9)
-export PATH=/usr/local/gcc-linaro-arm-linux-gnueabihf-4.9-2014.05_linux/bin/:$PATH
-
 # GOPATH
 export GOPATH=$HOME/projects/go
 export PATH=$PATH:$GOPATH/bin
+
+# golang working dir
+gowork() { cd $HOME/projects/go/src/github.com/mikkeloscar/$1; }
+compctl -W $HOME/projects/go/src/github.com/mikkeloscar/ -/ gowork
 
 gocover () {
     t="/tmp/go-cover.$$.tmp"
     go test -coverprofile=$t $@ && go tool cover -html=$t && unlink $t
 }
-
-# golang working dir
-gowork() { cd $HOME/projects/go/src/github.com/mikkeloscar/$1; }
-compctl -W $HOME/projects/go/src/github.com/mikkeloscar/ -/ gowork
 
 # golang (gitlab) working dir
 goworklab() { cd $HOME/projects/go/src/gitlab.com/mikkeloscar/$1; }
@@ -267,29 +262,34 @@ unset SSH_ASKPASS
 
 # Initialize new github repo
 hubify() {
-    user=$(git config --get github.user)
-    token=$(cat ~/.github.token)
-    curl -H "Authorization: token $token" https://api.github.com/user/repos -d "{\"name\":\"$1\"}"
-    git remote add origin git@github.com:$user/$1.git
+    local name=${1:-"$(basename $(pwd))"}
+    local user=$(git config --get github.user)
+    local token=$(cat ~/.github.token)
+    curl -H "Authorization: token $token" https://api.github.com/user/repos \
+        -d "{\"name\":\"$name\"}"
+    git remote add origin git@github.com:$user/$name.git
     git push -u origin master
 }
 
 # Initialize new gitlab repo (private)
 labify() {
-    user="mikkeloscar"
-    token=$(cat ~/.gitlab.token)
-    curl --data "name=$1" --header "PRIVATE-TOKEN: $token" https://gitlab.com/api/v3/projects
-    git remote add origin git@gitlab.com:$user/$1.git
+    local name=${1:-"$(basename $(pwd))"}
+    local user="mikkeloscar"
+    local token=$(cat ~/.gitlab.token)
+    curl --data "name=$name" --header "PRIVATE-TOKEN: $token" \
+        https://gitlab.com/api/v3/projects
+    git remote add origin git@gitlab.com:$user/$name.git
     git push -u origin master
 }
 
 # Initialize new bitbucket repo (private)
 bitbucket() {
-    user="mikkeloscar"
+    local name=${1:-"$(basename $(pwd))"}
+    local user="mikkeloscar"
     curl -X POST -u $user -H "Content-Type: application/json" \
-        https://api.bitbucket.org/2.0/repositories/$user/$1 \
+        https://api.bitbucket.org/2.0/repositories/$user/$name \
         -d '{"scm": "git", "is_private": "true", "fork_policy": "no_public_forks"}'
-    git remote add origin git@bitbucket.org:$user/$1.git
+    git remote add origin git@bitbucket.org:$user/$name.git
     git push -u origin --all
     git push -u origin --tags
 }
