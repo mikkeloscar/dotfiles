@@ -214,7 +214,7 @@ if &t_Co > 2 || has('gui_running')
 endif
 
 if has('nvim')
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  set termguicolors
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
   set background=dark
