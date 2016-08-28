@@ -6,6 +6,9 @@ unsetopt HIST_FIND_NO_DUPS
 setopt append_history no_inc_append_history no_share_history
 bindkey -v
 
+# set OS var
+OS="$(uname -s)"
+
 #-- Key bindings --#
 #
 
@@ -62,7 +65,14 @@ autoload -Uz compinit && compinit
 # autoload -Uz compinit && compinit
 autoload -U colors && colors
 
-alias ls='ls --color=auto'
+case "$OS" in
+    Linux)
+        alias ls='ls --color=auto'
+        ;;
+    Darwin)
+        alias ls='ls -G'
+        ;;
+esac
 
 export GREP_COLOR='31'
 
