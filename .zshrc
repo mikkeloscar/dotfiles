@@ -4,7 +4,7 @@ SAVEHIST=10000
 unsetopt HIST_FIND_NO_DUPS
 # setopt append_history share_history
 setopt append_history no_inc_append_history no_share_history
-bindkey -v
+bindkey -e
 
 # set OS var
 OS="$(uname -s)"
@@ -17,9 +17,6 @@ source ~/.config/zsh/func/zsh-history-substring-search.zsh
 zmodload zsh/terminfo
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
-
-bindkey '^R' history-incremental-search-backward
-bindkey '^S' history-incremental-search-forward
 
 # editing
 # delete
