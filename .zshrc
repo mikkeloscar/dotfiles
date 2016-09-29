@@ -1,9 +1,10 @@
+# configure history
 HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=50000
+SAVEHIST=50000
 unsetopt HIST_FIND_NO_DUPS
-# setopt append_history share_history
-setopt append_history no_inc_append_history no_share_history
+setopt inc_append_history
+
 bindkey -e
 
 # set OS var
@@ -243,6 +244,10 @@ gocover () {
     go test -coverprofile=$t $@ && go tool cover -html=$t && unlink $t
 }
 
+# golang working dir (teapot)
+goworkt() { cd $HOME/projects/go/src/github.bus.zalan.do/teapot/$1; }
+compctl -W $HOME/projects/go/src/github.bus.zalan.do/teapot/ -/ goworkt
+
 # golang (gitlab) working dir
 goworklab() { cd $HOME/projects/go/src/gitlab.com/mikkeloscar/$1; }
 compctl -W $HOME/projects/go/src/gitlab.com/mikkeloscar/ -/ goworklab
@@ -297,3 +302,12 @@ bitbucket() {
 
 # python virtualenvwrap
 # source /usr/bin/virtualenvwrapper.sh
+
+# enable gcloud & kubectl completions
+source /opt/google-cloud-sdk/completion.zsh.inc
+# Fix needed for using completion along with gcloud.
+# kubectl completion zsh | sed 's@autoload -U +X c@#autoload -U +X c@' > .kubectl.zsh
+source ~/.kubectl.zsh
+
+alias teapot="teapot --user mlarsen"
+alias k="kubectl"
