@@ -105,8 +105,6 @@ alias ix="curl -sF 'f:1=<-' ix.io"
 alias sprunge='curl -F "sprunge=<-" http://sprunge.us'
 alias pb='curl -F c=@- https://ptpb.pw'
 
-alias steam="LD_PRELOAD='/usr/lib32/libstdc++.so.6' steam"
-
 # less coloring
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
