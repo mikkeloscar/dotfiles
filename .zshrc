@@ -18,6 +18,10 @@ source ~/.config/zsh/func/zsh-history-substring-search.zsh
 zmodload zsh/terminfo
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
+# Ctrl+Left
+bindkey "^[[1;5D" backward-word
+# Ctrl+Right
+bindkey "^[[1;5C" forward-word
 
 # editing
 # delete
@@ -95,6 +99,9 @@ alias django="source /usr/bin/virtualenvwrapper.sh && workon django"
 alias u="cd .."
 alias uu="cd ../.."
 alias uuu="cd ../../.."
+
+alias ssh="TERM=xterm-256color ssh"
+alias vagrant="TERM=xterm-256color vagrant"
 
 # static webserver
 alias static="python -m http.server 3001"
