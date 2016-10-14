@@ -77,6 +77,8 @@ case "$OS" in
 esac
 
 export GREP_COLOR='31'
+# set TERM=xterm-256color so shit will work over ssh
+export TERM=xterm-256color
 
 alias grep='grep --color=auto'
 
@@ -99,9 +101,6 @@ alias django="source /usr/bin/virtualenvwrapper.sh && workon django"
 alias u="cd .."
 alias uu="cd ../.."
 alias uuu="cd ../../.."
-
-alias ssh="TERM=xterm-256color ssh"
-alias vagrant="TERM=xterm-256color vagrant"
 
 # static webserver
 alias static="python -m http.server 3001"
