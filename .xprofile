@@ -11,3 +11,6 @@ redshift -l 55.7:12.6 -t 5700:4500 -g 0.8 -m randr &
 
 # tell wayland clients not to spawn inside wayland if launched from X
 export WAYLAND_DISPLAY=get_lost
+# use gnome-keyring as ssh-agent
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+export SSH_AUTH_SOCK
