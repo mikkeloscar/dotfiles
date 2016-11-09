@@ -1,0 +1,2 @@
+/usr/bin/chromium %U
+  ^file://.*\.html$
