@@ -154,7 +154,6 @@ rst=$'%{\e[0m%}'
 # GIT_PROMPT_STATUS_C=""
 # GIT_PROMPT_SUFFIX_C=""
 
-
 # PROMPT=$'${light_green}%n${rst}%{$fg[red]%}@%{$fg[green]%}%m %{$fg[blue]%}$(prompt_git_info)
 # ${light_cyan}%~ %{$fg[white]%}> %{$reset_color%}'
 PROMPT=$'%{$fg_bold[red]%}%n%{$fg[cyan]%}@%{$fg[yellow]%}%m %{$reset_color%}%{$fg[blue]%}$(prompt_git_info)
@@ -239,9 +238,19 @@ compdef _git gst=git-status
 export GOPATH=$HOME/projects/go
 export PATH=$PATH:$GOPATH/bin
 
+setopt autocd
+
+cdpath=(
+$GOPATH/src/github.bus.zalan.do/teapot
+$GOPATH/src/github.com/mikkeloscar
+$GOPATH/src/github.com/zalando
+$GOPATH/src/github.com/zalando-incubator
+$GOPATH/src/k8s.io
+)
+
 # golang working dir
-gowork() { cd $HOME/projects/go/src/github.com/mikkeloscar/$1; }
-compctl -W $HOME/projects/go/src/github.com/mikkeloscar/ -/ gowork
+gowork() { cd $GOPATH/src/github.com/mikkeloscar/$1; }
+compctl -W $GOPATH/src/github.com/mikkeloscar/ -/ gowork
 
 gocover () {
     t="/tmp/go-cover.$$.tmp"
@@ -249,12 +258,8 @@ gocover () {
 }
 
 # golang working dir (teapot)
-goworkt() { cd $HOME/projects/go/src/github.bus.zalan.do/teapot/$1; }
-compctl -W $HOME/projects/go/src/github.bus.zalan.do/teapot/ -/ goworkt
-
-# golang (gitlab) working dir
-goworklab() { cd $HOME/projects/go/src/gitlab.com/mikkeloscar/$1; }
-compctl -W $HOME/projects/go/src/gitlab.com/mikkeloscar/ -/ goworklab
+# goworkt() { cd $HOME/projects/go/src/github.bus.zalan.do/teapot/$1; }
+# compctl -W $HOME/projects/go/src/github.bus.zalan.do/teapot/ -/ goworkt
 
 # Get latest package sources for Arch linux repo packages
 arch_src() {
@@ -312,6 +317,7 @@ source /opt/google-cloud-sdk/completion.zsh.inc
 # Fix needed for using completion along with gcloud.
 # kubectl completion zsh | sed 's@autoload -U +X c@#autoload -U +X c@' > .kubectl.zsh
 source ~/.kubectl.zsh
-
+export TEAPOT_PROVIDER=aws
 alias teapot="teapot --user mlarsen"
 alias k="kubectl"
+alias mai="zaws"
