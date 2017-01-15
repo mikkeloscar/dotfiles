@@ -1,5 +1,5 @@
 ! settings
-rofi.font: terminus 8
+rofi.font: xos4 terminus 8
 rofi.bw: 0
 rofi.location: 1
 rofi.lines: 3

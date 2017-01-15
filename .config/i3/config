@@ -162,7 +162,7 @@ bar {
         # tray_output primary
         tray_output DVI-1
         status_command i3status
-        font pango:Terminus, FontAwesome 8
+        font pango:xos4 terminus, FontAwesome 8
 
         # colors {
         #     focused_workspace #fbad46 #e68702 #ffffff
@@ -209,3 +209,5 @@ bindsym $mod+minus exec mpc volume -5
 
 # play youtube-videos in mpv
 bindsym $mod+y exec mpv $(xclip -o)
+
+# vim:ft=i3
