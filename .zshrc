@@ -305,6 +305,8 @@ bitbucket() {
     git push -u origin --tags
 }
 
+export HTTPIE_CONFIG_DIR=$HOME/.config/httpie
+
 # sourcing shitty scripts (only enable when used, makes startup 7x slower)
 # rvm
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
