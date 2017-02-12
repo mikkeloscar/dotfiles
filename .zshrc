@@ -231,6 +231,18 @@ alias git=hub
 alias gst='git status'
 compdef _git gst=git-status
 
+# replace string in all files (except .git/* & vendor/*) using sed syntax.
+# $1 sed replace syntax
+# $2 optional path defaults to .
+replace() {
+    local path="$2"
+    [ -z "$path" ] && path="."
+    /usr/bin/find $path \
+        -not \( -path ./.git -prune \) \
+        -not \( -path ./vendor -prune \) \
+        -type f -exec /usr/bin/sed -i "$1" {} +
+}
+
 # pkgfile
 [ -r /usr/share/doc/pkgfile/command-not-found.zsh ] && . /usr/share/doc/pkgfile/command-not-found.zsh
 
