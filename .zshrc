@@ -156,10 +156,13 @@ rst=$'%{\e[0m%}'
 
 # PROMPT=$'${light_green}%n${rst}%{$fg[red]%}@%{$fg[green]%}%m %{$fg[blue]%}$(prompt_git_info)
 # ${light_cyan}%~ %{$fg[white]%}> %{$reset_color%}'
+# PROMPT=$'%{$fg_bold[red]%}%n%{$fg[cyan]%}@%{$fg[yellow]%}%m %{$reset_color%}%{$fg[blue]%}$(prompt_git_info)
+# %{$fg_bold[green]%}%~ %{$fg[white]%}$ %{$reset_color%}'
 PROMPT=$'%{$fg_bold[red]%}%n%{$fg[cyan]%}@%{$fg[yellow]%}%m %{$reset_color%}%{$fg[blue]%}$(prompt_git_info)
-%{$fg_bold[green]%}%~ %{$fg[white]%}$ %{$reset_color%}'
+%{$fg_bold[green]%}%~
+%{$fg[white]%}> %{$reset_color%}'
 
-RPROMPT="[%{$fg[cyan]%}%?%{$reset_color%}]"
+RPROMPT=$'[%{$fg[cyan]%}%?%{$reset_color%}]'
 
 
 # -------------- custom stuff ----------------------------------
