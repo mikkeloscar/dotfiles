@@ -1,2 +1,4 @@
 Color = auto
 TargetDir = ~/cower_pkgs
+ConnectTimeout = 20
+MaxThreads = 3
