@@ -1,6 +1,7 @@
 [user]
 	name = Mikkel Oscar Lyderik Larsen
 	email = m@moscar.net
+	signingkey = F099CB25856A99F5BD38DC0952A88241F3D2F5C1
 [github]
 	user = mikkeloscar
 
@@ -27,5 +28,5 @@
 [credential]
 	helper = store
 [commit]
-	; gpgsign = true
+	gpgsign = true
 	cleanup = scissors
