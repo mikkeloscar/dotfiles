@@ -13,6 +13,8 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'jiangmiao/auto-pairs'
 let g:AutoPairsShortcutFastWrap = ''
+Plugin 'dyng/ctrlsf.vim'
+nmap <C-S-f> <Plug>CtrlSFPrompt
 
 Plugin 'Valloric/YouCompleteMe'
 set completeopt=menuone
