@@ -107,6 +107,8 @@ imap <F3> <Esc>:bnext<CR>
 " close current buffer
 map <leader>d :call CleanClose()<CR>
 
+vnoremap <A-c> "+y
+
 " From:
 " http://stackoverflow.com/questions/256204/
 " close-file-without-quitting-vim-application
