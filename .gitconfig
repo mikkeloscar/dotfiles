@@ -30,3 +30,5 @@
 [commit]
 	gpgsign = true
 	cleanup = scissors
+[url "git@github.bus.zalan.do:"]
+	insteadOf = https://github.bus.zalan.do/
