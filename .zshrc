@@ -84,7 +84,7 @@ alias grep='grep --color=auto'
 
 alias pc='sudo pacman'
 alias pcc='pacman'
-alias pacs='sudo pacman-optimize && sudo reflector --verbose -l 10 --sort rate --save /etc/pacman.d/mirrorlist'
+alias pacs='sudo reflector --verbose -l 10 --sort rate --save /etc/pacman.d/mirrorlist'
 
 # user nvim in place of vim
 alias vim='nvim'
@@ -144,6 +144,8 @@ preexec_functions+='preexec_update_git_vars'
 precmd_functions+='precmd_update_git_vars'
 chpwd_functions+='chpwd_update_git_vars'
 
+source ~/.config/zsh/kube-ps1.sh
+
 # Set the prompt.
 light_green=$'%{\e[1;32m%}'
 light_cyan=$'%{\e[1;36m%}'
@@ -158,7 +160,7 @@ rst=$'%{\e[0m%}'
 # ${light_cyan}%~ %{$fg[white]%}> %{$reset_color%}'
 # PROMPT=$'%{$fg_bold[red]%}%n%{$fg[cyan]%}@%{$fg[yellow]%}%m %{$reset_color%}%{$fg[blue]%}$(prompt_git_info)
 # %{$fg_bold[green]%}%~ %{$fg[white]%}$ %{$reset_color%}'
-PROMPT=$'%{$fg_bold[red]%}%n%{$fg[cyan]%}@%{$fg[yellow]%}%m %{$reset_color%}%{$fg[blue]%}$(prompt_git_info)
+PROMPT=$'%{$fg_bold[red]%}%n%{$fg[cyan]%}@%{$fg[yellow]%}%m %{$reset_color%}%{$fg[blue]%}$(prompt_git_info)$(kube_ps1)
 %{$fg_bold[green]%}%~
 %{$fg[white]%}> %{$reset_color%}'
 
@@ -256,7 +258,9 @@ export PATH=$PATH:$GOPATH/bin
 setopt autocd
 
 cdpath=(
+$GOPATH/src/github.bus.zalan.do/mlarsen
 $GOPATH/src/github.bus.zalan.do/teapot
+$GOPATH/src/github.bus.zalan.do/ie
 $GOPATH/src/github.com/mikkeloscar
 $GOPATH/src/github.com/zalando
 $GOPATH/src/github.com/zalando-incubator
@@ -334,7 +338,6 @@ source /opt/google-cloud-sdk/completion.zsh.inc
 # Fix needed for using completion along with gcloud.
 # kubectl completion zsh | sed 's@autoload -U +X c@#autoload -U +X c@' > .kubectl.zsh
 source ~/.kubectl.zsh
-export TEAPOT_PROVIDER=aws
-alias teapot="teapot --user mlarsen"
+source ~/.teapot.zsh
 alias k="kubectl"
 alias mai="zaws"
