@@ -1,32 +1,35 @@
 set nocompatible              " be iMproved, required
-filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Specify a directory for plugins
+" nvim setup:
+" curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+call plug#begin('~/.vim/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'jiangmiao/auto-pairs'
 let g:AutoPairsShortcutFastWrap = ''
-Plugin 'dyng/ctrlsf.vim'
-nmap <C-S-f> <Plug>CtrlSFPrompt
 
-Plugin 'Valloric/YouCompleteMe'
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.status == 'updated' || a:info.force
+    !./install.py
+  endif
+endfunction
+
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 set completeopt=menuone
 let g:ycm_complete_in_comments = 1
 let g:ycm_confirm_extra_conf = 0
 
-Plugin 'rdnetto/YCM-Generator'
-" let g:ycm_add_preview_to_completeopt = 0
-" let g:ycm_autoclose_preview_window_after_completion = 1
-Plugin 'michaeljsmith/vim-indent-object'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
@@ -36,52 +39,53 @@ if has('gui_running')
   let g:airline_symbols.branch = "⎇ "
 endif
 
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:ctrlp_custom_ignore = {
   \ 'dir': '\v[\/](node_modules|bower_components|docs|dist)$',
   \ }
 
-Plugin 'benekastah/neomake'
-au BufWritePost * Neomake!
+Plug 'neomake/neomake'
 
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 nmap <F6> :TagbarToggle<CR>
 
-Plugin 'gregsexton/MatchTag'
-Plugin 'jamessan/vim-gnupg'
+Plug 'gregsexton/MatchTag'
+Plug 'jamessan/vim-gnupg'
 
 " Syntax highlighting / programming language environments
-Plugin 'tpope/vim-rails'
-Plugin 'rust-lang/rust.vim'
-Plugin 'cespare/vim-toml'
-Plugin 'fatih/vim-go'
+Plug 'tpope/vim-rails'
+Plug 'rust-lang/rust.vim'
+Plug 'cespare/vim-toml'
+
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 let g:go_fmt_fail_silently = 1
 
-Plugin 'digitaltoad/vim-jade'
-Plugin 'groenewege/vim-less'
-Plugin 'PotatoesMaster/i3-vim-syntax'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'tpope/vim-haml'
-Plugin 'adimit/prolog.vim'
-Plugin 'sudar/vim-arduino-syntax'
-Plugin 'Matt-Deacalion/vim-systemd-syntax'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'plasticboy/vim-markdown'
+Plug 'digitaltoad/vim-jade'
+Plug 'groenewege/vim-less'
+Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'tpope/vim-haml'
+Plug 'adimit/prolog.vim'
+Plug 'sudar/vim-arduino-syntax'
+Plug 'Matt-Deacalion/vim-systemd-syntax'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
 
-Plugin 'tfnico/vim-gradle'
-Plugin 'peterhoeg/vim-qml'
-Plugin 'dag/vim-fish'
+Plug 'tfnico/vim-gradle'
+Plug 'peterhoeg/vim-qml'
+Plug 'dag/vim-fish'
 
 " Color schemes
-Plugin 'tomasr/molokai'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'morhetz/gruvbox'
+Plug 'tomasr/molokai'
+Plug 'altercation/vim-colors-solarized'
+Plug 'morhetz/gruvbox'
 let g:gruvbox_contrast_dark='hard'
 
-call vundle#end()
-filetype plugin indent on
+call plug#end()
+
+" auto enable neomake
+call neomake#configure#automake('w')
 
 " General mappings {{{
 
@@ -274,6 +278,8 @@ au FileType c,cpp setl ts=8 sts=8 sw=8 noexpandtab nolist
 au FileType java setl ts=8 sts=8 sw=8 noexpandtab nolist
 " ant
 au FileType ant setl sw=2 ts=2
+" groovy
+au FileType groovy setl tw=120
 " Go
 au FileType go setl ts=8 sts=8 sw=8 noexpandtab nolist
 " au FileType go nmap <Leader>s <Plug>(go-implements)
@@ -308,7 +314,6 @@ map <F5> :make<CR>
 " Abbrivations
 iab py# #!/usr/bin/python
 iab rb# #!/usr/bin/ruby
-iab node# #!/usr/bin/node
 iab bash# #!/bin/bash
 iab stdio# #include <stdio.h>
 
