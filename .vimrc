@@ -57,9 +57,14 @@ Plug 'jamessan/vim-gnupg'
 Plug 'tpope/vim-rails'
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
+Plug 'vim-scripts/indentpython.vim'
+Plug 'nvie/vim-flake8'
+let python_highlight_all=1
 
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 let g:go_fmt_fail_silently = 1
+
+Plug 'davidhalter/jedi-vim'
 
 Plug 'digitaltoad/vim-jade'
 Plug 'groenewege/vim-less'
@@ -280,6 +285,8 @@ au FileType java setl ts=8 sts=8 sw=8 noexpandtab nolist
 au FileType ant setl sw=2 ts=2
 " groovy
 au FileType groovy setl tw=120
+" Python
+au FileType python setl ts=4 sts=4 sw=4 tw=79 expandtab autoindent fileformat=unix
 " Go
 au FileType go setl ts=8 sts=8 sw=8 noexpandtab nolist
 " au FileType go nmap <Leader>s <Plug>(go-implements)
