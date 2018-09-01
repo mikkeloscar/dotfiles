@@ -288,7 +288,7 @@ au FileType groovy setl tw=120
 " Python
 au FileType python setl ts=4 sts=4 sw=4 tw=79 expandtab autoindent fileformat=unix
 " Go
-au FileType go setl ts=8 sts=8 sw=8 noexpandtab nolist
+au FileType go,gomod setl ts=8 sts=8 sw=8 noexpandtab nolist
 " au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)
 " au FileType go nmap <Leader>gd <Plug>(go-doc)
