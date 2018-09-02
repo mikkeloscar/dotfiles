@@ -181,7 +181,8 @@ bar {
 bindsym Ctrl+$alt+l exec i3lock -c 000000
 # screenshot
 bindsym Print exec scrot
-#
+bindsym --release $mod+p exec "$HOME/.config/i3/bin/scrnsht.sh"
+
 bindsym $mod+g exec chromium
 # bindsym $mod+h exec $term -e htop
 bindsym $mod+BackSpace exec thunar
@@ -190,7 +191,7 @@ bindsym $mod+0 exec $term -e "ncmpcpp -c $XDG_CONFIG_HOME/ncmpcpp/config"
 bindsym $mod+i exec $term -e "mosh scw -- tmux a -t irc"
 
 # mpd bindings
-bindsym $mod+p exec mpc toggle
+# bindsym $mod+p exec mpc toggle
 
 # sound bindings (using pulseaudio_ctl from AUR)
 bindsym XF86AudioRaiseVolume exec /usr/bin/pulseaudio-ctl up
