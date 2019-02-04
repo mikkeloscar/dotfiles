@@ -181,7 +181,7 @@ bar {
 bindsym Ctrl+$alt+l exec i3lock -c 000000
 # screenshot
 bindsym Print exec scrot
-bindsym --release $mod+p exec "$HOME/.config/i3/bin/scrnsht.sh"
+bindsym --release $mod+p exec "$HOME/.config/i3/bin/scrnsht_gnome.sh"
 
 bindsym $mod+g exec chromium
 # bindsym $mod+h exec $term -e htop
