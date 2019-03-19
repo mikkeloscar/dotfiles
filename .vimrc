@@ -63,6 +63,7 @@ let python_highlight_all=1
 
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 let g:go_fmt_fail_silently = 1
+let g:go_def_mode = "gopls"
 
 Plug 'davidhalter/jedi-vim'
 
@@ -116,6 +117,8 @@ imap <F3> <Esc>:bnext<CR>
 " close current buffer
 map <leader>d :call CleanClose()<CR>
 
+" vnoremap <C-S-C> "+y
+" vnoremap <leader>c "+y
 vnoremap <A-c> "+y
 
 " From:
