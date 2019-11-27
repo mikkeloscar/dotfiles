@@ -253,7 +253,7 @@ replace() {
 
 # GOPATH
 export GOPATH=$HOME/projects/go
-export PATH=$PATH:$GOPATH/bin
+export PATH=$GOPATH/bin:$PATH
 
 setopt autocd
 
@@ -261,6 +261,8 @@ cdpath=(
 $GOPATH/src/github.bus.zalan.do/mlarsen
 $GOPATH/src/github.bus.zalan.do/teapot
 $GOPATH/src/github.bus.zalan.do/ie
+$HOME/projects/mikkeloscar
+$HOME/projects/teapot
 $GOPATH/src/github.com/mikkeloscar
 $GOPATH/src/github.com/zalando
 $GOPATH/src/github.com/zalando-incubator
@@ -339,5 +341,6 @@ source /opt/google-cloud-sdk/completion.zsh.inc
 # kubectl completion zsh | sed 's@autoload -U +X c@#autoload -U +X c@' > .kubectl.zsh
 source ~/.kubectl.zsh
 source ~/.teapot.zsh
+source ~/.zregistry.zsh
 alias k="kubectl"
 alias mai="zaws"
