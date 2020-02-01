@@ -254,6 +254,8 @@ replace() {
 # GOPATH
 export GOPATH=$HOME/projects/go
 export PATH=$GOPATH/bin:$PATH
+# python path
+export PATH=$PATH:$HOME/.local/bin
 
 setopt autocd
 
@@ -343,4 +345,3 @@ source ~/.kubectl.zsh
 source ~/.teapot.zsh
 source ~/.zregistry.zsh
 alias k="kubectl"
-alias mai="zaws"
