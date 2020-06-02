@@ -12,6 +12,8 @@
 	ui = true
 [push]
 	default = simple
+[pull]
+	ff = only
 [alias]
 	co = checkout
 	ci = commit
