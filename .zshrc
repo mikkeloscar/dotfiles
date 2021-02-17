@@ -84,7 +84,7 @@ alias grep='grep --color=auto'
 
 alias pc='sudo pacman'
 alias pcc='pacman'
-alias pacs='sudo reflector --verbose -l 10 --sort rate --save /etc/pacman.d/mirrorlist'
+alias pacs='sudo reflector --verbose --protocol https -l 10 --sort rate --save /etc/pacman.d/mirrorlist'
 
 # user nvim in place of vim
 alias vim='nvim'
@@ -251,11 +251,12 @@ replace() {
 # pkgfile
 [ -r /usr/share/doc/pkgfile/command-not-found.zsh ] && . /usr/share/doc/pkgfile/command-not-found.zsh
 
+# User PATH
+export PATH=$HOME/.local/bin:$PATH
+
 # GOPATH
 export GOPATH=$HOME/projects/go
 export PATH=$GOPATH/bin:$PATH
-# python path
-export PATH=$PATH:$HOME/.local/bin
 
 setopt autocd
 
@@ -263,12 +264,12 @@ cdpath=(
 $GOPATH/src/github.bus.zalan.do/mlarsen
 $GOPATH/src/github.bus.zalan.do/teapot
 $GOPATH/src/github.bus.zalan.do/ie
-$HOME/projects/mikkeloscar
-$HOME/projects/teapot
 $GOPATH/src/github.com/mikkeloscar
 $GOPATH/src/github.com/zalando
 $GOPATH/src/github.com/zalando-incubator
 $GOPATH/src/k8s.io
+$HOME/projects/teapot
+$HOME/projects/mikkeloscar
 )
 
 # golang working dir
